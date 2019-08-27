@@ -242,21 +242,3 @@ disp('1+double(eps) (single precision eps):  ');
 fprintf('%32.31f \n',double(1.0)+double(epssingle));
 disp('1+double(eps)/2.0 (single precision eps):  ');
 fprintf('%32.31f \n',double(1.0)+double(epssingle)/2);
-
-
-
-%% Objective function for 1D examples
-function fval=fun1D(x,A,x0,sigmax)
-
-  fval=A.*exp(-(x-x0).^2/2/sigmax);
-
-end %function
-
-
-
-%% Objective function for 2D examples
-function fval=fun2D(x,y,A,x0,y0,sigmax,sigmay)
-
-  fval=A.*exp(-(x-x0).^2/2/sigmax^2).*exp(-(y-y0).^2/2/sigmay^2);
-
-end %function
