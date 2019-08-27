@@ -6,6 +6,7 @@
 
 %% Things illustrated during class
 
+% installing matlab
 % arrays, vector operations, etc.
 % complex number manipulation, abs, angle, real, imaginary
 % random number generation:  rand, randn, histograms
