@@ -238,7 +238,7 @@ fprintf('%32.31f \n',single(1.0)+epssingle);
 disp('1+eps/2 (single precision):  ');
 fprintf('%32.31f \n\n',single(1.0)+epssingle/2);
 
-disp('1 (dobule precision):  ')
+disp('1 (double precision):  ')
 fprintf('%32.31f \n',double(1.0));
 disp('1+double(eps) (single precision eps):  ');
 fprintf('%32.31f \n',double(1.0)+double(epssingle));
