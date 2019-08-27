@@ -1,6 +1,8 @@
 % The purpose of this program is to illustrate examples of a wide swath of 
 % common Matlab use cases, most of which will be useful at some point in the
 % semester.  
+%
+%This script requires files containing the functions fun1D and fun2D.  
 
 
 
