@@ -27,3 +27,19 @@ x=A\b;
 disp('x = ');
 disp(x);
 
+
+%% Illustrate vanilla forward elimination
+
+n=6;              %system size
+B=randn(n,n+1);    %augmented matrix containing RHS of system of equations, hopefully not singular since using randn...
+
+for ir1=2:n                                           %loop over rows from 2 to n performing elimination, this index marks what row we are starting the elimination from for this particular column
+    for ir2=ir1:n                                     %this index marks the present position where elimination is being performed - i.e. where we are applying the elementary row operations
+        fact=B(ir2,ir1-1);                                    %multiplier of the variable we are attempting to eliminate, its ir-1 column of this row
+        B(ir2,:)=B(ir2,:)-fact/B(ir1-1,ir1-1).*B(ir1-1,:);    %subtract off previous row modified by a factor that eliminates the ir-1 column term in this row (so it has only super-diagonal elements)
+    end %for
+end %for
+
+disp('elim(B) = ');
+disp(B);
+
