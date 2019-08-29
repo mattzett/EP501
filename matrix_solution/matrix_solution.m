@@ -31,9 +31,14 @@ disp(x);
 %% Illustrate vanilla forward elimination
 
 n=6;              %system size
-B=randn(n,n+1);    %augmented matrix containing RHS of system of equations, hopefully not singular since using randn...
+Bref=randn(n,n+1);    %augmented matrix containing RHS of system of equations, hopefully not singular since using randn...
+%Bref=cat(2,A,b);
+%n=size(A,1);
+bref=Bref(:,n+1);   %RHS
 
-for ir1=2:n                                           %loop over rows from 2 to n performing elimination, this index marks what row we are starting the elimination from for this particular column
+%note that the elimination procedure modifies the matrix B
+B=Bref;          %make a copy of the original since it will be change by this code
+for ir1=2:n                                           %loop over rows from 2 to n performing elimination, this index marks what row we are starting the elimination from (i.e. using) for this particular column
     for ir2=ir1:n                                     %this index marks the present position where elimination is being performed - i.e. where we are applying the elementary row operations
         fact=B(ir2,ir1-1);                                    %multiplier of the variable we are attempting to eliminate, its ir-1 column of this row
         B(ir2,:)=B(ir2,:)-fact/B(ir1-1,ir1-1).*B(ir1-1,:);    %subtract off previous row modified by a factor that eliminates the ir-1 column term in this row (so it has only super-diagonal elements)
@@ -43,3 +48,27 @@ end %for
 disp('elim(B) = ');
 disp(B);
 
+
+%% Illustrate back substitution on B
+
+n=size(B,1);                   %number of unknowns in the system
+xsoln=zeros(n,1);              %space in which to store our solution vector
+xsoln(n)=B(n,n+1)/B(n,n);      %finalized solution for last variable
+
+%note that B is assumed to be upper triangular at this point
+for ir1=n-1:-1:1              %iterate backwards from last equation using its value to solve others
+    for ir2=ir1:-1:1          %this must also iterate backwards
+        xsoln(ir2)=B(ir2,n+1);    %assume we're only dealing with a single right-hand side here.
+        fact=B(ir2,ir2);      %diagonal element to be divided through doing subs for the ir2 row
+        for ic=ir2+1:n
+            xsoln(ir2)=xsoln(ir2)-B(ir2,ic)*xsoln(ic);
+        end %for
+        xsoln(ir2)=xsoln(ir2)/fact;     %divide once at the end to reduce number of ops
+    end %for
+end %for
+
+disp('Elimination/back sub solution:  ');
+disp(xsoln);
+
+disp('Matlab built-in solution:  ');
+disp(Bref(1:n,1:n)\bref);
