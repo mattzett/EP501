@@ -4,7 +4,7 @@
 
 %% Illustrate the number of operations needed to implement Cramer's rule
 
-n=[1,3,10,30];
+n=1:10;
 nops=(n-1).*factorial(n+1)+n;      %see book for justification
 loglog(n,nops,'o','LineWidth',2,'MarkerSize',20,'MarkerFaceColor','blue');
 xlabel('size of system (# of unknowns)');
