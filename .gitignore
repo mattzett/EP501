@@ -2,3 +2,5 @@ html/
 *.eps
 *.png
 *~
+*.DS_Store
+
