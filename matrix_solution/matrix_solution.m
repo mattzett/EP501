@@ -74,15 +74,15 @@ disp('Matlab,GNU/Octave built-in solution:  ');
 disp(Bref(1:n,1:n)\bref);
 
 
-%% Check the Gaussian elimination function
+%% Use the Gaussian elimination function
 [Bmod,ord]=elim(Bref(1:n,1:n),bref);
 
-disp('Elimination with scaled pivoting:  ')
+disp('Elimination with scaled pivoting on matrix:  ')
 disp(Bmod(ord,:));
 
 xgauss=backsub(Bmod(ord,:));
 
-disp('Back sub solution using Gaussian elimination result:  ')
+disp('Back substitution solution using Gaussian elimination result:  ')
 disp(xgauss);
 
 
