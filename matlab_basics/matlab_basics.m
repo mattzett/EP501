@@ -8,7 +8,6 @@
 
 %% Things illustrated during class
 
-% updates
 % installing matlab
 % arrays, vector operations, etc.
 % complex number manipulation, abs, angle, real, imaginary
