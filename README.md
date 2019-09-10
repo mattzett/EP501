@@ -7,4 +7,7 @@ Example codes for the EP 501 (numerical methods) course at Embry-Riddle Aeronaut
 1)  located in ./matlab_basics/matlab_basics.m
 2)  illustrates precision, matrix operations, and plotting, along with some special functions
 
+## Numerical linear algebra (Ch. 1)
 
+1)  located in ./linear_algebra/matrix_solution.m
+2)  illustrates and checks various methods for solving matrix problems

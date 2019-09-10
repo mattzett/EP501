@@ -1,9 +1,10 @@
 % A simple script to solve a system of equations, while checking various
 % aspects of the matrix representation of that system
+%
+%This script requires files containing the functions gauss_elim and backsub.  
 
 
 %% Illustrate the number of operations needed to implement Cramer's rule
-
 n=1:10;
 nops=(n-1).*factorial(n+1)+n;      %see book for justification
 loglog(n,nops,'o','LineWidth',2,'MarkerSize',20,'MarkerFaceColor','blue');
