@@ -80,7 +80,7 @@ disp(xgauss);
 
 
 %% Print step by step solution (Gauss elimination) for a simple system to illustrate
-[Amod,ord]=elim(A,b,true);
+[Amod,ord]=gauss_elim(A,b,true);
 
 
 %% Solve a large system and time it
@@ -89,7 +89,7 @@ Blarge=randn(nlarge,nlarge);
 blarge=randn(nlarge,1);
 
 tstart=cputime;
-[Blargemod,ordlarge]=elim(Blarge,blarge);
+[Blargemod,ordlarge]=gauss_elim(Blarge,blarge);
 xlarge=backsub(Blargemod(ordlarge,:));
 tend=cputime;
 disp(['Solution for system of size ',num2str(nlarge),' takes ',num2str(tend-tstart),' s']);
