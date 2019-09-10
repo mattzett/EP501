@@ -1,4 +1,4 @@
-function [Amod,ord]=elim(A,b,verbose)
+function [Amod,ord]=gauss_elim(A,b,verbose)
 
 % [Amod,ord]=elim(A,b,verbose)
 %
@@ -8,14 +8,14 @@ function [Amod,ord]=elim(A,b,verbose)
 % is stored in the ord output variable, such that the upper triangular output
 % is given by row-permuted matrix Amod(ord,:).  The verbose flag can be set to
 % true or false (or omitted, default=false) in order to print out what the algirthm
-% is doing for each elimination step.  
+% is doing for each elimination step.
 
 %Parse the inputs, throw an error if something is obviously wrong with input data
 if (nargin<2 || nargin>3)
-  error('Incorrect number of input arguments to elim!!!')
+    error('Incorrect number of input arguments to elim!!!')
 end %if
 if (nargin<3)
-  verbose=false;
+    verbose=false;
 end %if
 
 %Allocation of space and setup
@@ -27,21 +27,21 @@ ord=[1:n]';               %ord is a mapping from input row being operated upon t
 %indices must be screen through ord mapping.
 for ir1=1:n-1
     if (verbose)
-      disp('Starting Gauss elimination from row:  ');
-      disp(ir1);
-      disp('Current state of matrix:  ');
-      disp(Amod(ord,:));
+        disp('Starting Gauss elimination from row:  ');
+        disp(ir1);
+        disp('Current state of matrix:  ');
+        disp(Amod(ord,:));
     end %if
-  
+    
     %check scaled pivot elements to see if reordering should be done
     pivmax=0;
     ipivmax=ir1;      %max pivot element should never be higher than my current position
     for ipiv=ir1:n    %look only below my current position in the matrix
-      pivcurr=Amod(ord(ipiv),ir1)/max(Amod(ord(ir1),:));      %note that columns never get reordered...
-      if (pivcurr>pivmax) 
-          pivmax=pivcurr;
-          ipivmax=ipiv;     %this stores the index into ord for row having largest pivot element
-      end %if
+        pivcurr=Amod(ord(ipiv),ir1)/max(Amod(ord(ir1),:));      %note that columns never get reordered...
+        if (pivcurr>pivmax)
+            pivmax=pivcurr;
+            ipivmax=ipiv;     %this stores the index into ord for row having largest pivot element
+        end %if
     end %for
     
     %reorder if situation calls for it
@@ -51,15 +51,15 @@ for ir1=1:n-1
         ord(ipivmax)=itmp;
         
         if (verbose)
-          disp('Interchanging rows:  ');
-          disp(itmp);
-          disp(' and:  ');
-          disp(ord(ir1));
-          disp('Current matrix state after interchange:  ');
-          disp(Amod(ord,:));
+            disp('Interchanging rows:  ');
+            disp(itmp);
+            disp(' and:  ');
+            disp(ord(ir1));
+            disp('Current matrix state after interchange:  ');
+            disp(Amod(ord,:));
         end %if
     end %if
-        
+    
     %perform the elimination for this row, former references to ir1 are now
     %mapped through the ord array
     for ir2=ir1+1:n
@@ -67,11 +67,11 @@ for ir1=1:n-1
         Amod(ord(ir2),:)=Amod(ord(ir2),:)-fact/Amod(ord(ir1),ir1).*Amod(ord(ir1),:);
     end %for
     
-    if (verbose) 
-      disp('Following elimination for row:  ');
-      disp(ir1);
-      disp(' matrix state:  ');
-      disp(Amod(ord,:));
+    if (verbose)
+        disp('Following elimination for row:  ');
+        disp(ir1);
+        disp(' matrix state:  ');
+        disp(Amod(ord,:));
     end %if
 end %for
 

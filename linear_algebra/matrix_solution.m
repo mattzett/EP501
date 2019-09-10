@@ -14,9 +14,9 @@ title('Computational Cost of Cramer''s Rule')
 
 %% Define a problem
 % Example solved by hand in class
-%   x1 + 4*x2 + 2*x3  = 2
-% 3*x1 + 2*x2 +   x3 = 3
-% 2*x1 +   x2 + 3*x3 = -1
+%   x1 + 4*x2 + 2*x3  = 15
+% 3*x1 + 2*x2 +   x3 = 10
+% 2*x1 +   x2 + 3*x3 = 13
 A=[1, 4, 2; ...
    3, 2, 1; ...
    2, 1, 3];
@@ -70,7 +70,7 @@ disp(Bref(1:n,1:n)\bref);
 
 
 %% Use the Gaussian elimination function (included scaled pivoting)
-[Bmod,ord]=elim(Bref(1:n,1:n),bref);
+[Bmod,ord]=gauss_elim(Bref(1:n,1:n),bref);
 
 disp('Elimination with scaled pivoting on matrix:  ')
 disp(Bmod(ord,:));
