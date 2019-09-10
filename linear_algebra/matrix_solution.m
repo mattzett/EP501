@@ -13,23 +13,20 @@ title('Computational Cost of Cramer''s Rule')
 
 
 %% Define a problem
-
 % Example solved by hand in class
-%   x1 +   x2 + 3*x3  = 2
-% 5*x1 + 3*x2 +   x3 = 3
-% 2*x1 + 3*x2 +   x3 = -1
-A=[1, 1, 3; ...
-   5, 3, 1; ...
-   2, 3, 1];
-b=[2; 3; -1];
+%   x1 + 4*x2 + 2*x3  = 2
+% 3*x1 + 2*x2 +   x3 = 3
+% 2*x1 +   x2 + 3*x3 = -1
+A=[1, 4, 2; ...
+   3, 2, 1; ...
+   2, 1, 3];
+b=[15;10;13];
 x=A\b;
-
 disp('x = ');
 disp(x);
 
 
 %% Illustrate vanilla forward elimination
-
 n=6;              %system size
 Bref=randn(n,n+1);    %augmented matrix containing RHS of system of equations, hopefully not singular since using randn...
 %Bref=cat(2,A,b);
@@ -50,7 +47,6 @@ disp(B);
 
 
 %% Illustrate back substitution on B
-
 n=size(B,1);                   %number of unknowns in the system
 xsoln=zeros(n,1);              %space in which to store our solution vector
 xsoln(n)=B(n,n+1)/B(n,n);      %finalized solution for last variable
@@ -69,22 +65,31 @@ end %for
 
 disp('Elimination/back sub solution:  ');
 disp(xsoln);
-
 disp('Matlab,GNU/Octave built-in solution:  ');
 disp(Bref(1:n,1:n)\bref);
 
 
-%% Use the Gaussian elimination function
+%% Use the Gaussian elimination function (included scaled pivoting)
 [Bmod,ord]=elim(Bref(1:n,1:n),bref);
 
 disp('Elimination with scaled pivoting on matrix:  ')
 disp(Bmod(ord,:));
-
 xgauss=backsub(Bmod(ord,:));
-
 disp('Back substitution solution using Gaussian elimination result:  ')
 disp(xgauss);
 
 
+%% Print step by step solution (Gauss elimination) for a simple system to illustrate
+[Amod,ord]=elim(A,b,true);
 
 
+%% Solve a large system and time it
+nlarge=256;
+Blarge=randn(nlarge,nlarge);
+blarge=randn(nlarge,1);
+
+tstart=cputime;
+[Blargemod,ordlarge]=elim(Blarge,blarge);
+xlarge=backsub(Blargemod(ordlarge,:));
+tend=cputime;
+disp(['Solution for system of size ',num2str(nlarge),' takes ',num2str(tend-tstart),' s']);
