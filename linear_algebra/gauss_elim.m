@@ -21,7 +21,7 @@ end %if
 %Allocation of space and setup
 Amod=cat(2,A,b);          %make a copy of A and modify with RHS of system
 n=size(A,1);              %number of unknowns
-ord=[1:n]';               %ord is a mapping from input row being operated upon to the actual row that represents in the matrix ordering
+ord=(1:n)';               %ord is a mapping from input row being operated upon to the actual row that represents in the matrix ordering
 
 %Elimination with scaled, partial pivoting for matrix Amod; note all row
 %indices must be screen through ord mapping.
@@ -64,7 +64,7 @@ for ir1=1:n-1
     %mapped through the ord array
     for ir2=ir1+1:n
         fact=Amod(ord(ir2),ir1);
-        Amod(ord(ir2),:)=Amod(ord(ir2),:)-fact/Amod(ord(ir1),ir1).*Amod(ord(ir1),:);
+        Amod(ord(ir2),ir1+1:n+1)=Amod(ord(ir2),ir1+1:n+1)-fact/Amod(ord(ir1),ir1).*Amod(ord(ir1),ir1+1:n+1);    %only need columns ahead of where we are in matrix
     end %for
     
     if (verbose)
