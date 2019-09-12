@@ -12,7 +12,7 @@ function [Amod,ord]=gauss_elim(A,b,verbose)
 
 %Parse the inputs, throw an error if something is obviously wrong with input data
 if (nargin<2 || nargin>3)
-    error('Incorrect number of input arguments to elim!!!')
+    error('gauss_elim() requires two or three input arguments!!!')
 end %if
 if (nargin<3)
     verbose=false;
@@ -64,7 +64,7 @@ for ir1=1:n-1
     %mapped through the ord array
     for ir2=ir1+1:n
         fact=Amod(ord(ir2),ir1);
-        Amod(ord(ir2),ir1+1:n+1)=Amod(ord(ir2),ir1+1:n+1)-fact/Amod(ord(ir1),ir1).*Amod(ord(ir1),ir1+1:n+1);    %only need columns ahead of where we are in matrix
+        Amod(ord(ir2),ir1:n+1)=Amod(ord(ir2),ir1:n+1)-fact/Amod(ord(ir1),ir1).*Amod(ord(ir1),ir1:n+1);    %only need columns ahead of where we are in matrix
     end %for
     
     if (verbose)

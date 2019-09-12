@@ -7,10 +7,11 @@
 %% Illustrate the number of operations needed to implement Cramer's rule
 n=1:10;
 nops=(n-1).*factorial(n+1)+n;      %see book for justification
+figure(1);
 loglog(n,nops,'o','LineWidth',2,'MarkerSize',20,'MarkerFaceColor','blue');
 xlabel('size of system (# of unknowns)');
 ylabel('number of multiply/divides needed to solve');
-title('Computational Cost of Cramer''s Rule')
+title('Theoretical Computational Cost of Cramer''s Rule')
 
 
 %% Define a problem
@@ -23,7 +24,7 @@ A=[1, 4, 2; ...
    2, 1, 3];
 b=[15;10;13];
 x=A\b;
-disp('x = ');
+disp('(class problem Matlab solution) x = ');
 disp(x);
 
 
@@ -70,27 +71,45 @@ disp('Matlab,GNU/Octave built-in solution:  ');
 disp(Bref(1:n,1:n)\bref);
 
 
-%% Use the Gaussian elimination function (included scaled pivoting)
+%% Use the Gaussian elimination function to solve the same system (include scaled pivoting)
 [Bmod,ord]=gauss_elim(Bref(1:n,1:n),bref);
 
-disp('Elimination with scaled pivoting on matrix:  ')
+disp('Elimination with scaled pivoting on matrix:  ');
 disp(Bmod(ord,:));
 xgauss=backsub(Bmod(ord,:));
-disp('Back substitution solution using Gaussian elimination result:  ')
+disp('Back substitution solution using Gaussian elimination result:  ');
 disp(xgauss);
 
 
 %% Print step by step solution (Gauss elimination) for a simple system to illustrate
+disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%');
 [Amod,ord]=gauss_elim(A,b,true);
+disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%');
 
 
-%% Solve a large system and time it
-nlarge=256;
-Blarge=randn(nlarge,nlarge);
-blarge=randn(nlarge,1);
+%% Evaluate performance and scaling of Gaussian elimination
+nvals=50:50:750;
+testtimes=zeros(size(nvals));
+lrep=1;     %how many times to repeat each test
 
-tstart=cputime;
-[Blargemod,ordlarge]=gauss_elim(Blarge,blarge);
-xlarge=backsub(Blargemod(ordlarge,:));
-tend=cputime;
-disp(['Solution for system of size ',num2str(nlarge),' takes ',num2str(tend-tstart),' s']);
+disp('Start of tests of Gaussian-elimination scaling');
+for in=1:numel(nvals)
+    nlarge=nvals(in);
+    Blarge=randn(nlarge,nlarge);
+    blarge=randn(nlarge,1);
+    
+    for irep=1:lrep     %benchmark will repeat the same solution several times to eliminate random variations from CPU load, etc.
+        tstart=cputime;
+        [Blargemod,ordlarge]=gauss_elim(Blarge,blarge);
+        xlarge=backsub(Blargemod(ordlarge,:));
+        tend=cputime;
+        testtimes(in)=testtimes(in)+(tend-tstart)/lrep;
+    end %for
+    disp([' solution for system of size ',num2str(nlarge),' takes average time ',num2str(testtimes(in)),' s']);
+end %for
+
+figure(2);
+plot(nvals,testtimes,'o','LineWidth',2,'MarkerSize',20,'MarkerFaceColor','blue')
+xlabel('system size');
+ylabel('time to solve (s)');
+title('Empirical Performance of Gaussian Elimination');
