@@ -11,9 +11,7 @@ function [Amod,ord]=gauss_elim(A,b,verbose)
 % is doing for each elimination step.
 
 %Parse the inputs, throw an error if something is obviously wrong with input data
-if (nargin<2 || nargin>3)
-    error('gauss_elim() requires two or three input arguments!!!')
-end %if
+narginchk(2,3);
 if (nargin<3)
     verbose=false;
 end %if

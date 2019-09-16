@@ -88,7 +88,7 @@ disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%');
 
 
 %% Evaluate performance and scaling of Gaussian elimination
-nvals=50:50:750;
+nvals=50:50:500;
 testtimes=zeros(size(nvals));
 lrep=1;     %how many times to repeat each test
 
@@ -113,3 +113,16 @@ plot(nvals,testtimes,'o','LineWidth',2,'MarkerSize',20,'MarkerFaceColor','blue')
 xlabel('system size');
 ylabel('time to solve (s)');
 title('Empirical Performance of Gaussian Elimination');
+
+
+%% Solve reference system using Jacobi iteration
+n=10;
+Ait=diag(-1*ones(n-1,1),-1)+diag(-1*ones(n-1,1),1)+diag(4*ones(n,1),0);    %this must be diagonally dominant or else the method won't converge
+%Ait=randn(n,n);    %see if code can detect non-diagonal dominance and exit gracefully...
+x0=randn(n,1);
+bit=ones(n,1);
+disp('Verbose Jacobi iterations:  ')
+xit=jacobi(x0,Ait,bit,true);
+
+
+
