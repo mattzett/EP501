@@ -9,5 +9,5 @@ Example codes for the EP 501 (numerical methods) course at Embry-Riddle Aeronaut
 
 ## Numerical linear algebra (Ch. 1)
 
-1)  located in ./linear_algebra/matrix_solution.m
+1)  located in ./linear_algebra/Ch1.m
 2)  illustrates and checks various methods for solving matrix problems
