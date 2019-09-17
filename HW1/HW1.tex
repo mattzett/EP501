@@ -1,0 +1,42 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{fullpage}
+
+\begin{document}
+
+\title{EP 501 Homework 1:  Numerical Linear Algebra}
+
+\maketitle
+
+\textbf{Instructions:}  Complete all problems and submit source code and published Matlab results via Canvas.  
+
+\begin{enumerate}
+  \item Basic elimination and substitution for linear equations
+  \begin{itemize}
+    \item[(a)] Make a Matlab function that used simple elimination (without pivoting or scaling) - do not use any vectorized Matlab operations - write out all loops explicitly.  
+    \item[(b)] Write and test a forward substitution function for a lower-triangular system (will be used again in later problems)
+  \end{itemize}
+  \item Matrix inversion methods
+  \begin{itemize}
+    \item[(a)] Alter elimination to work for multiple right-hand sides
+    \item[(b)] Implement Gauss-Jordan elimination in a function (you may want to reuse some code from your simple elimination function)
+    \item[(c)] Find matrix inverse using Gauss Jordan elimination
+    \item[(d)] Compare with builtin and use to solve a system.  
+  \end{itemize}
+  \item LU factorization application to solve linear systems
+  \begin{itemize}
+    \item[(a)] Alter your simple elimination function to perform Doolittle LU factorization.  
+    \item[(b)] Using just the output of the factorization and a back-substitution step, solve a linear system of equations
+    \item[(c)] Use LU factors for a system to set up a solution for the same system with a different RHS using forward and backward substitution
+    \item[(d)] Show that this process is faster for multiple RHS than performing simple elimination followed by backsubstitution (requires results from 2)
+    \item[(e)] Use your LU factorization function to find a matrix inverse.  
+  \end{itemize}
+  \item Iterative methods - implement Gauss-Seidel and SOR and do some testing.  
+  \item Determinants
+  \begin{itemize}
+    \item[(a)] Write code or a function to calculate determinant from simple elimination  
+    \item[(b)] Calculate determinant from Gaussian Elimination function...
+  \end{itemize}
+\end{enumerate}
+
+\end{document}
