@@ -1,24 +1,26 @@
-function x=jacobi(x0,A,b,verbose)
+function [x,nit]=Jacobi(x0,A,b,tol,verbose)
 
 %% Check the inputs
-narginchk(3,4);
+narginchk(3,5);
 if nargin<4
+    tol=1e-6;
+end %if
+if nargin<5
     verbose=false;
 end %if
 
 
 %% Setup iterations
 maxit=100;    %max number of iterations
-conv=1e-6;    %relative change in residual for convergence
 n=size(A,1);  %system size
 residual=10*ones(n,1);
-difftot=1e3+conv;   %max sure we enter iterations
+difftot=1e3+tol;   %max sure we enter iterations
 x=x0;
 
 
 %% Perform iterations
 it=1;
-while(difftot>conv && it<=maxit)
+while(difftot>tol && it<=maxit)
     difftotprev=difftot;
     resprev=residual;
     xprev=x;
@@ -46,7 +48,8 @@ while(difftot>conv && it<=maxit)
     it=it+1;
 end %while
 
-if (it-1==maxit)
+nit=it-1;
+if (n==maxit)
     warning('Solution may not have converged fully...')
 end %if
 

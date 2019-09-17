@@ -1,4 +1,4 @@
-function [Amod,ord]=gauss_elim(A,b,verbose)
+function [Amod,ord]=Gauss_elim(A,b,verbose)
 
 % [Amod,ord]=elim(A,b,verbose)
 %
