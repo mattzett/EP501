@@ -4,11 +4,11 @@
 \usepackage{hyperref}
 \usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage{draftwatermark}
+%\usepackage{draftwatermark}
 
-\SetWatermarkText{DRAFT}
-\SetWatermarkScale{3}
-\SetWatermarkLightness{0.5}
+%\SetWatermarkText{DRAFT}
+%\SetWatermarkScale{3}
+%\SetWatermarkLightness{0.5}
 
 \begin{document}
 
@@ -25,7 +25,7 @@
   \item I must be able to run your code and produce all results by executing a single top-level Matlab script, e.g. \textsf{assignment1.m} or similar.  
   \item You may use any of the example codes from our course repository:  \url{https://github.com/mattzett/EP501/}.
   \item Do not copy verbatim any other codes (i.e. any source codes other than from our course repository).  You may use other examples as a reference but you must write you own programs (except for those I give you).  
-  \item For demonstrating that your code is correct when you turn in the assignment, you must use the test problem in the course repository found in \texttt{linear\_algebra/testproblem.mat} (elimination methods) and \texttt{linear\_algebra/iterative\_testproblem.mat} (iterative methods requiring diagonal dominance).  
+  \item For demonstrating that your code is correct when you turn in the assignment, you must use the test problems in the course repository found in \texttt{linear\_algebra/testproblem.mat} (elimination method tests), \texttt{linear\_algebra/lowertriang\_testproblem.mat} (lower triangular tests) and \texttt{linear\_algebra/iterative\_testproblem.mat} (iterative method tests requiring diagonal dominance).  
 \end{itemize}
 ~\\~\\~\\
 \textbf{Purpose of this assignment:}  
@@ -44,34 +44,34 @@
   \item Develop some basic elimination and substitution tools for linear equations:   
   \begin{itemize}
     \item[(a)] Write a Matlab function that uses simple forward elimination (without pivoting or scaling).  Do not use any vectorized Matlab operations - write out all loops explicitly.  You will need to rewrite the version in the repository to get rid of such operations.  
-    \item[(b)] Create a test problem and solve the problem using your function and the back-substitution function in the course repository.   Check that your method gives the same solution as the Matlab built-in solutions and the same solution as with the Gaussian elimination function from the repository.  
+    \item[(b)] Solve the test problem from the repository using your function and the back-substitution function in the course repository.   Also demonstrate that your method gives the same solution as the Matlab built-in solutions and the same solution as with the Gaussian elimination function from the repository.  
     demonstrate that your solution gives the same results 
     \item[(c)] Write and a forward substitution function for a lower-triangular system.  
-    \item[(d)] Create a test problem and verify that your function gives the same results as the Matlab built-in solution routines (e.g. \texttt{A\textbackslash b} or \texttt{inv(A)*b}).  
+    \item[(d)] Verify that your function gives the same results as the Matlab built-in solution routines for the \emph{lower triangular} test problem (e.g. \texttt{A\textbackslash b} or \texttt{inv(A)*b}).  
   \end{itemize}
   \item Elimination methods for computing matrix inverses:  
   \begin{itemize}
     \item[(a)] Alter (i.e. create a new version of) your simple elimination function to work for multiple right-hand sides (RHS).  
     \item[(b)] Create a function that implements Gauss-Jordan elimination; you should start from your forward elimination function for multiple RHS and add the backward eliminations needed.  
-    \item[(c)] Find the inverse of a test matrix using your Gauss-Jordan elimination function
+    \item[(c)] Find the inverse of the test problem matrix using your Gauss-Jordan elimination function
     \item[(d)] Compare your results with Matlab built-in inverse operation(s) and show that they agree.
   \end{itemize}
   \item LU factorization and its application to solve linear systems
   \begin{itemize}
     \item[(a)] Alter (i.e. create a new version of) your simple forward elimination function that performs Doolittle LU factorization.  Please read the book section 1.4, which explains how this can be implemented in an efficient way (the book also gives an example fortran code you can look over).  
-    \item[(b)] Using just the output of the factorization and a back-substitution function (provided in the repository), solve a test linear system of equations.  
-    \item[(c)] Use your LU factorization on the same test system to set up a solution for the this system with a different RHS using only your forward- and back-substitution functions.
-    \item[(e)] Use your LU factorization function to find a matrix inverse for your test problem.  
+    \item[(b)] Using just the output of the factorization and a back-substitution function (provided in the repository), solve the test linear system of equations.  
+    \item[(c)] Use your LU factorization on the same test matrix to set up a solution for the this system with a different right hand sides using only your forward- and back-substitution functions.
+    \item[(e)] Use your LU factorization function to find a matrix inverse for the test problem in the course repository.  
   \end{itemize}
   \item Iterative methods for solving linear systems:  
   \begin{itemize}
     \item[(a)] Using the Jacobi function from the repository, create a new function that implements successive over-relaxation.  
-    \item[(b)] Try this solver on a test problem and show that it gives the same results as the built-in Matlab utilities.  Your test problem must be diagonally dominant (cf. Section 1.2.1 of the textbook) or else iterative approaches will not work.  
+    \item[(b)] Try this solver on the \emph{iterative} test problem in the repository and show that it gives the same results as the built-in Matlab utilities. 
   \end{itemize}  
   \item Numerical approaches for computing determinants:  
   \begin{itemize}
     \item[(a)] Create a new version of the Gaussian elimination function (from the course repo) that also outputs the determinant of the system (cf. section 1.3.6 of the textbook).  
-    \item[(b)] Demonstrate that your software gives the same results as the Matlab built-in \texttt{det()}
+    \item[(b)] Demonstrate that your software gives the same results as the Matlab built-in \texttt{det()} - use the test problem from the course repository.  
     
   \end{itemize}
 \end{enumerate}
