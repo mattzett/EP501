@@ -1,6 +1,7 @@
-% A script to demonstrate solutions to nonlinear equations
+% A script to demonstrate solutions to nonlinear equations on closed
+% domains
 %
-% requires:  objfun?.m
+% requires:  objfun?.m (set function pointer f to desired function at beginning of program)
 
 
 %% Common setup for closed domain problems
