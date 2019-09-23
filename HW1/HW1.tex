@@ -25,7 +25,11 @@
   \item I must be able to run your code and produce all results by executing a single top-level Matlab script, e.g. \textsf{assignment1.m} or similar.  
   \item You may use any of the example codes from our course repository:  \url{https://github.com/mattzett/EP501/}.
   \item Do not copy verbatim any other codes (i.e. any source codes other than from our course repository).  You may use other examples as a reference but you must write you own programs (except for those I give you).  
-  \item For demonstrating that your code is correct when you turn in the assignment, you must use the test problems in the course repository found in \texttt{linear\_algebra/testproblem.mat} (elimination method tests), \texttt{linear\_algebra/lowertriang\_testproblem.mat} (lower triangular tests) and \\ \texttt{linear\_algebra/iterative\_testproblem.mat} (iterative method tests requiring diagonal dominance).  
+  \item For demonstrating that your code is correct when you turn in the assignment, you must use the test problems in the course repository found in \texttt{linear\_algebra/testproblem.mat} (elimination method tests, including multiple right-hand sides), \texttt{linear\_algebra/lowertriang\_testproblem.mat} (lower triangular tests) and \\ \texttt{linear\_algebra/iterative\_testproblem.mat} (iterative method tests requiring diagonal dominance).  To load these data into your workspace use:
+    \begin{verbatim}
+    load testproblem.mat
+    \end{verbatim}
+    or double click on the .mat file in the Matlab file browser.  
 \end{itemize}
 ~\\~\\~\\
 \textbf{Purpose of this assignment:}  
@@ -44,9 +48,8 @@
   \item Develop some basic elimination and substitution tools for linear equations:   
   \begin{itemize}
     \item[(a)] Write a Matlab function that uses simple forward elimination (without pivoting or scaling).  Do not use any vectorized Matlab operations - write out all loops explicitly.  You will need to rewrite the version in the repository to get rid of such operations.  
-    \item[(b)] Solve the test problem from the repository using your function and the back-substitution function in the course repository.   Also demonstrate that your method gives the same solution as the Matlab built-in solutions and the same solution as with the Gaussian elimination function from the repository.  
-    demonstrate that your solution gives the same results 
-    \item[(c)] Write and a forward substitution function for a lower-triangular system.  
+    \item[(b)] Solve the test problem from the repository using your function and the back-substitution function in the course repository; use the right-hand side given in the \texttt{b} array (\texttt{b2,b3} are for later use).   Also demonstrate that your method gives the same solution as the Matlab built-in solutions and the same solution as with the Gaussian elimination function from the repository. 
+    \item[(c)] Write a forward substitution function for a lower-triangular system.  
     \item[(d)] Verify that your function gives the same results as the Matlab built-in solution routines for the \emph{lower triangular} test problem (e.g. \texttt{A\textbackslash b} or \texttt{inv(A)*b}).  
   \end{itemize}
   \item Elimination methods for computing matrix inverses:  
@@ -58,10 +61,16 @@
   \end{itemize}
   \item LU factorization and its application to solve linear systems
   \begin{itemize}
-    \item[(a)] Alter (i.e. create a new version of) your simple forward elimination function that performs Doolittle LU factorization.  Please read the book section 1.4, which explains how this can be implemented in an efficient way (the book also gives an example fortran code you can look over).  
-    \item[(b)] Using just the output of the factorization and a back-substitution function (provided in the repository), solve the test linear system of equations.  
-    \item[(c)] Use your LU factorization on the same test matrix to set up a solution for the this system with a different right hand sides using only your forward- and back-substitution functions.
-    \item[(e)] Use your LU factorization function to find a matrix inverse for the test problem in the course repository.  
+    \item[(a)] Alter (i.e. create a new version of) your simple forward elimination function (as opposed to full Gaussian elimination) that performs Doolittle LU factorization.  Please read the book section 1.4, which explains how this can be implemented in an efficient way (the book also gives an example fortran code you can look over).  
+    \item[(b)] Using just the output of the factorization and a back-substitution function (provided in the repository), solve the test linear system of equations given in the \texttt{testproblem.mat} file.  
+    \item[(c)] Use your LU factorized test matrix to set up a solution for the this system with different right hand sides, i.e. solve:
+    \begin{eqnarray}
+      \underline{\underline{A}} ~\underline{x} &=& \underline{b} \\
+      \underline{\underline{A}} ~\underline{x}_2 &=& \underline{b}_2 \\
+      \underline{\underline{A}} ~\underline{x}_3 &=& \underline{b}_3    
+    \end{eqnarray}   
+    Using only forward- and back-substitution codes (along with the matrices $\underline{\underline{L}}, \underline{\underline{U}}$).  Multiple right-hand side test data are included in the \texttt{testproblem.mat} file as the variables (\texttt{b,b2,b3}).
+    \item[(d)] Use your LU factorization function and multiple right-hand side solution (using forward and back substitution as in part c) to find a matrix inverse for the test problem in the course repository.  
   \end{itemize}
   \item Iterative methods for solving linear systems:  
   \begin{itemize}
