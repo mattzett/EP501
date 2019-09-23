@@ -11,3 +11,10 @@ Example codes for the EP 501 (numerical methods) course at Embry-Riddle Aeronaut
 
 1)  located in ./linear_algebra/Ch1.m
 2)  illustrates and checks various methods for solving matrix problems
+
+## First homework assignment (Ch. 1)
+
+1)  located in ./HW1/
+2)  includes .pdf of the homework assignment and LaTeX source code
+3)  includes test data that you should be using to complete the assignment (see homework document)
+
