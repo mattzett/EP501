@@ -35,7 +35,7 @@ for ir1=1:n-1
     pivmax=0;
     ipivmax=ir1;      %max pivot element should never be higher than my current position
     for ipiv=ir1:n    %look only below my current position in the matrix
-        pivcurr=Amod(ord(ipiv),ir1)/max(Amod(ord(ir1),:));      %note that columns never get reordered...
+        pivcurr=Amod(ord(ipiv),ir1)/max(Amod(ord(ipiv),:));      %note that columns never get reordered...
         if (pivcurr>pivmax)
             pivmax=pivcurr;
             ipivmax=ipiv;     %this stores the index into ord for row having largest pivot element
