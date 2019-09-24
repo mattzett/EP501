@@ -5,7 +5,7 @@
 
 
 %% Common setup for closed domain problems
-maxit=100;       %maximum number of iterations
+maxit=100;       %maximum number of iterations allowed
 f=@objfun2;      %set the function for which we are finding roots, change to illustrate different problems
 minx=0;          %interval over which we are finding root (closed domain problems)
 maxx=2*pi;
