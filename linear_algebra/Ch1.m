@@ -76,7 +76,7 @@ Ait=diag(-1*ones(nit-1,1),-1)+diag(-1*ones(nit-1,1),1)+diag(4*ones(nit,1),0);   
 %Ait=randn(nit,nit);    %see if code can detect non-diagonal dominance and exit gracefully...
 x0=randn(nit,1);
 bit=ones(nit,1);
-tol=1e-5;
+tol=1e-4;
 disp('Verbose Jacobi iterations:  ')
 [xit,iterations]=Jacobi(x0,Ait,bit,tol,true);
 

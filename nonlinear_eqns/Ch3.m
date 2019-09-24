@@ -6,10 +6,10 @@
 
 %% Common setup for closed domain problems
 maxit=100;       %maximum number of iterations
-f=@objfun1;      %set the function for which we are finding roots, change to illustrate different problems
+f=@objfun2;      %set the function for which we are finding roots, change to illustrate different problems
 minx=0;          %interval over which we are finding root (closed domain problems)
 maxx=2*pi;
-tol=1e-6;        %how close to zero we need to get to cease iterations
+tol=1e-4;        %how close to zero we need to get to cease iterations
 x=linspace(minx,maxx,24);   %grid for basic plotting purposes
 ygrid=f(x);
 verbose=true;
@@ -118,7 +118,7 @@ while (~converged && it<=maxit)
             plot(bprev,0,'k^','MarkerSize',10,'LineWidth',2);
         end %if
         plot(c,0,'ko','MarkerSize',10,'LineWidth',2);
-        y=(f(bprev)-f(aprev))/(bprev-aprev)*(x-aprev)+f(aprev);
+        y=(f(bprev)-f(aprev))/(bprev-aprev)*(x-aprev)+f(aprev);    %approximate line
         plot(x,y,'--');
         hold off;
         xlabel('x');
