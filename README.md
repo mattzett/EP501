@@ -21,10 +21,4 @@ Example codes for the EP 501 (numerical methods) course at Embry-Riddle Aeronaut
 ## Nonlinear equations (Ch. 3)
 
 1)  located in ./nonlinear
-dsfgsdfgsdfgsdfg
-
-
-sdfgsdfg
-sdfg
-sdfgsdfgsdfgsfdgsdf
 
