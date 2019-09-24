@@ -47,7 +47,7 @@
 \begin{enumerate}
   \item Develop some basic elimination and substitution tools for linear equations:   
   \begin{itemize}
-    \item[(a)] Write a Matlab function that uses simple forward elimination (without pivoting or scaling).  Do not use any vectorized Matlab operations - write out all loops explicitly.  You will need to rewrite the version in the repository to get rid of such operations.  
+    \item[(a)] Write a Matlab function that uses simple forward elimination (without pivoting or scaling).  Do not use any vectorized Matlab operations; use loops instead.  You will need to rewrite the version in the repository to get rid of such operations.  
     \item[(b)] Solve the test problem from the repository using your function and the back-substitution function in the course repository; use the right-hand side given in the \texttt{b} array (\texttt{b2,b3} are for later use).   Also demonstrate that your method gives the same solution as the Matlab built-in solutions and the same solution as with the Gaussian elimination function from the repository. 
     \item[(c)] Write a forward substitution function for a lower-triangular system.  
     \item[(d)] Verify that your function gives the same results as the Matlab built-in solution routines for the \emph{lower triangular} test problem (e.g. \texttt{A\textbackslash b} or \texttt{inv(A)*b}).  
