@@ -18,3 +18,13 @@ Example codes for the EP 501 (numerical methods) course at Embry-Riddle Aeronaut
 2)  includes .pdf of the homework assignment and LaTeX source code
 3)  includes test data that you should be using to complete the assignment (see homework document)
 
+## Nonlinear equations (Ch. 3)
+
+1)  located in ./nonlinear
+dsfgsdfgsdfgsdfg
+
+
+sdfgsdfg
+sdfg
+sdfgsdfgsdfgsfdgsdf
+
