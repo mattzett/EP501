@@ -7,12 +7,13 @@
 %% Common setup for closed domain problems
 maxit=100;       %maximum number of iterations allowed
 f=@objfun2;      %set the function for which we are finding roots, change to illustrate different problems
+fprime=@objfun2_deriv;
 minx=0;          %interval over which we are finding root (closed domain problems)
 maxx=2*pi;
-tol=1e-4;        %how close to zero we need to get to cease iterations
+tol=1e-6;        %how close to zero we need to get to cease iterations
 x=linspace(minx,maxx,24);   %grid for basic plotting purposes
 ygrid=f(x);
-verbose=true;
+verbose=false;
 
 
 %% Plot function for which roots are to be found
@@ -134,4 +135,17 @@ disp('Root value through false position:  ');
 disp(xnew);
 disp('Number of iterations required to reach tolerance:  ');
 disp(it-1);
+
+
+%% Newton-Rhapson root-finding method
+[xNewton,itNew]=newton_exact(f,fprime,0,100,tol,verbose);
+disp('Root value through Newton method:  ');
+disp(xNewton);
+disp('Number of iterations required to reach tolerance:  ');
+disp(itNew);
+
+
+%% Newton-Rhapson for finding *all* roots
+
+
 
