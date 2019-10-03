@@ -1,5 +1,5 @@
 % A script to demonstrate solutions to nonlinear equations on closed
-% domains
+% and open domains
 %
 % requires:  objfun?.m (set function pointer f to desired function at beginning of program)
 
@@ -139,18 +139,17 @@ disp(it-1);
 
 %% Newton-Rhapson root-finding method
 verbose=true;
-[xNewton,itNew]=newton_exact(f,fprime,-1,100,tol,verbose);
+[xNewton,itNew,flag]=newton_exact(f,fprime,-5*i,100,tol,verbose);
 disp('Root value through Newton method:  ');
 disp(xNewton);
 disp('Number of iterations required to reach tolerance:  ');
 disp(itNew);
 
-[xNewton,itNew]=newton_exact(f,fprime,1,100,tol,verbose);
+[xNewton,itNew,flag]=newton_exact(f,fprime,5*i,100,tol,verbose);
 disp('Root value through Newton method:  ');
 disp(xNewton);
 disp('Number of iterations required to reach tolerance:  ');
 disp(itNew);
-
 
 
 % %% Newton approach for suspected complex roots
@@ -167,5 +166,26 @@ disp(itNew);
 % disp(itNew);
 
 
+%% Multidimensional function example
+fm=@objfun2Df;
+gm=@objfun2Dg;
+gradfm=@grad_objfun2Df;
+gradgm=@grad_objfun2Dg;
+
+x=linspace(-1.5,1.5,20);
+y=linspace(-1.5,1.5,20);
+[X,Y]=meshgrid(x,y);
+F=fm(X,Y);
+G=gm(X,Y);
 
 
+%% Newton's method for multi-variable nonlinear equations
+x0=5;
+y0=1;
+[xm,ym,it2D,success2D]=newton2D_exact(fm,gradfm,gm,gradgm,x0,y0,100,1e-6,true);
+
+figure;
+surf(X,Y,F);
+hold on;
+surf(X,Y,G);
+plot3(xm,ym,0,'wo','MarkerSize',32,'LineWidth',8);

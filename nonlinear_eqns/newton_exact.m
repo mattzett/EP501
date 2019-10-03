@@ -38,18 +38,12 @@ while(~converged && it<=maxit)
         break;
     else
         root=root-fval./derivative;    % update root estimate
-        fvalprev=fval;
         fval=f(root);                  % see how far off we are from zero...
         if (verbose)
-            fprintf(' iteration: %d; root:  %f; function value: %f, derivative:  %f \n',it,root,fval,derivative);
+            fprintf(' iteration: %d; root:  %f + %f i; function value: %f, derivative:  %f \n',it,real(root),imag(root),fval,derivative);
         end %if
         it=it+1;
         converged=abs(fval)<tol;
-%         if(abs(fval)>abs(fvalprev))
-%             warning(' We appear to be diverging, halting iterations');
-%             converged=false;
-%             break;
-%         end %if
     end %if
 end %while
 it=it-1;
