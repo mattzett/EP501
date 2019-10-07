@@ -23,4 +23,9 @@ Stuff stufff stuff
 ## Nonlinear equations (Ch. 3)
 
 1)  located in ./nonlinear
+2)  contains various functions related to Newton's method
+
+## Second homework assignment (Ch. 1)
+
+1)  located in ./HW2/
 
