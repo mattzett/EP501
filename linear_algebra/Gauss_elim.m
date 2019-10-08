@@ -16,6 +16,8 @@ if (nargin<3)
     verbose=false;
 end %if
 
+%Need to error check for square input.  
+
 %Allocation of space and setup
 Amod=cat(2,A,b);          %make a copy of A and modify with RHS of system
 n=size(A,1);              %number of unknowns
