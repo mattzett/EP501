@@ -20,16 +20,12 @@
 \textbf{Instructions:}  
 \begin{itemize}
   \item Complete all problems.
-  \item Submit all source code and publish Matlab results via Canvas.  
+  \item Submit all source code and publish Matlab results via Canvas.  Please zip all contents of your solution into single file and then submit that file.    
   \item Discussing the assignment with others is fine, but you must not copy anyone's code.  
   \item I must be able to run your code and produce all results by executing a single top-level Matlab script, e.g. \textsf{assignment1.m} or similar.  
   \item You may use any of the example codes from our course repository:  \url{https://github.com/mattzett/EP501/}.
   \item Do not copy verbatim any other codes (i.e. any source codes other than from our course repository).  You may use other examples as a reference but you must write you own programs (except for those I give you).  
-    \begin{verbatim}
-    load testproblem.mat
-    \end{verbatim}
-    or double click on the .mat file in the Matlab file browser.  
-    \item For demonstrating that your code is correct when you turn in the assignment, you must use the test problems in the course repository found in...
+    \item For demonstrating that your code is correct when you turn in the assignment, you must use the test problems given in the assignment text below.  
     \item  All solutions for this homework must be accurate to at least six decimal places.  
 
 \end{itemize}
@@ -53,8 +49,14 @@
   \end{itemize} 
   \item Numerical solution for multiple polynomial roots:
   \begin{itemize}
-    \item[(a)]  Suppose you have a polynomial of known or given order and need to find all of its roots.  Write a block of code or a script that uses the exact Newton method (e.g. the function in the course repository) to find all of the real-valued roots of a polynomial.  Assume that you do not need to identify repeated roots (if any).
-    \item[(b)]  Produce an altered version of your code to deal with the fact that there are potentially complex roots to your polynomial.  Use this code to find all polynomial roots, including complex-valued solutions.  
+    \item[(a)]  Suppose you have a polynomial of known or given order and need to find all of its roots.  Write a block of code or a script that uses the exact Newton method (e.g. the function in the course repository) to find all of the real-valued roots of a polynomial.  Assume that you do not need to identify repeated roots (if any).  Test your code on the polynomial used in the book (Eqn. 3.115):
+    \begin{equation}
+      x^5-15x^4+85x^3-225x^2+274x-120=0 \label{eqn:highpoly}
+    \end{equation}
+    \item[(b)]  Produce an altered version of your code to deal with the fact that there are potentially complex roots to your polynomial.  Use this code to find all roots, including complex-valued solutions of the following polynomial (Eqn 3.145 in the book):
+    \begin{equation}
+      x^3-3x^2+4x-2=0
+    \end{equation}  
   \end{itemize}
   \item Polynomial deflation and its use in root finding for high-order polynomials:  
   \begin{itemize}
@@ -62,24 +64,27 @@
     \begin{equation}
       a x^2 + b x + c = 0 
     \end{equation}
-    given a column vector of coefficients $[a, b, c]^\mathsf{T}$.  Test your code on a polynomial with known roots and make sure your code works for complex conjugate roots.  
+    given a column vector of coefficients $[a, b, c]^\mathsf{T}$.  Test your code on a polynomial with known roots and make sure your code works for complex conjugate roots.  Test your code on the quadratic:
+    \begin{equation}
+      2x^2-6x+4=0
+    \end{equation}
     \item[(b)]  Write a polynomial division algorithm (cf. pgs. 194-195 of the course textbook) capable of dividing a given polynomial $P_n(x)$ (of order $n$ and defined by a set of coefficients) by a given divisor $(x-N)$.  Viz. find $Q_{n-1}(x)$ and $R$ such that:
     \begin{equation}
       P_n(x) = (x-N) Q_{n-1}(x)+R
     \end{equation}    
-    Test your code with on a polynomial with a known factorization to make sure that it works.  
-    \item[(c)]  Use Newton's method to numerically find \emph{one} root of a given high-order polynomial, and then use your synthetic division algorithm to factor that root out of the polynomial to produce a lower-order polynomial (i.e. $Q_{n-1}(x)$).
-    \item[(d)]  By iterating this process repeatedly find all roots of the polynomial; e.g. by then taking $Q_{n-1}$ and using Newton's method to find one of its roots and then factoring that root to produce $Q_{n-2}$ all the way down to $Q_2$.  Once you have $Q_2$ use your quadratic formula to find the final two roots.
-    \item[(e)]  Note that the polynomial division approach has the drawback of introducing errors at each stage of factorization and compounded these across later factorization steps.  The best way to deal with this is to take the estimated root from the deflation process of part d of this problem and use them as starting points for separate Newton iterations, which will then cause these inputs to converge to the true roots to a desired level of precision.  Use this method on your root estimates to produce polished root calculations that are \emph{all} accurate to six decimal places.  
+    Test your code with on the polynomial of Eqn. \ref{eqn:highpoly} to divide out a factor of $(x-5)$.  
+    \item[(c)]  Use Newton's method to numerically find \emph{one} root of a given high-order polynomial, and then use your synthetic division algorithm to factor that root out of the polynomial to produce a lower-order polynomial (i.e. $Q_{n-1}(x)$).  Use the test polynomial of Eqn. \ref{eqn:highpoly}.
+    \item[(d)]  By iterating this process repeatedly find all roots of Eqn. \ref{eqn:highpoly} ; e.g. by then taking $Q_{n-1}$ and using Newton's method to find one of its roots and then factoring that root to produce $Q_{n-2}$ all the way down to $Q_2$.  Once you have $Q_2$ use your quadratic formula to find the final two roots.
+    \item[(e)]  Note that the polynomial division approach has the drawback of introducing errors at each stage of factorization and compounded these across later factorization steps.  The best way to deal with this is to take the estimated root from the deflation process of part d of this problem and use them as starting points for separate Newton iterations, which will then cause these inputs to converge to the true roots to a desired level of precision.  Use this method on your root estimates to produce polished root calculations for Eqn. \ref{high:poly} that are \emph{all} accurate to six decimal places.  
   \end{itemize}
   \item Multivariate root finding:
   \begin{itemize}
-    \item[(a)]  Use the multi-dimensional Newton method to find all four roots of the system:
+    \item[(a)]  Use the multi-dimensional Newton method (given the in course repository:  \texttt{newton2D\_exact.m}) to find all four roots of the system:
     \begin{eqnarray}
       x^2+y^2&=&2x+y \\
       \frac{x^2}{4}+y^2&=&1      
     \end{eqnarray}
-    \item[(b)]  Produce an altered multi-dimensional Newton method to find a root for the three equations system:
+    \item[(b)]  Produce an altered multi-dimensional Newton method (start from \texttt{newton2D\_exact.m}) to find a root for the three equations system:
     \begin{eqnarray}
       x^2+y^2+z^2&=&6\\
       x^2-y^2+2z^2&=&2\\
