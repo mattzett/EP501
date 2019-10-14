@@ -172,6 +172,7 @@ gm=@objfun2Dg;
 gradfm=@grad_objfun2Df;
 gradgm=@grad_objfun2Dg;
 
+%this is for plotting
 x=linspace(-1.5,1.5,20);
 y=linspace(-1.5,1.5,20);
 [X,Y]=meshgrid(x,y);
@@ -180,8 +181,8 @@ G=gm(X,Y);
 
 
 %% Newton's method for multi-variable nonlinear equations
-x0=5;
-y0=1;
+x0=-1;
+y0=-0.5;
 [xm,ym,it2D,success2D]=newton2D_exact(fm,gradfm,gm,gradgm,x0,y0,100,1e-6,true);
 
 figure;
