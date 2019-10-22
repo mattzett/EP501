@@ -12,7 +12,7 @@
 
 \begin{document}
 
-\title{EP 501 Homework 2:  Nonlinear Equations and Root-finding}
+\title{EP 501 Homework 3:  Least Squares and Interpolation}
 
 \maketitle
 
@@ -39,9 +39,16 @@
 \pagebreak
 
 \begin{enumerate}
-  \item Least squares and data fitting:  this problem requires use of the example dataset from the repository.  
+  \item Least squares and data fitting:  this problem requires use of the example dataset from the repository which provides data for $x_i,y_i,\sigma_i$.  
   \begin{itemize}
-    \item[(a)]  
+    \item[(a)] Write a program that performs a linear least squares fit of a set of data to a polynomial of arbitrary order $n$.
+    \item[(b)] Use this program to fit the data to a line and a quadratic form.  Plot your results and the data on the same axis so they can be easily compared.  Which fit looks better (linear or quadratic)?  
+    \item[(c)] A more rigorous way of deciding between preferred function forms in fits (e.g. linear, quadratic, cubic, quartic, etc.) is to define a \emph{goodness-of-fit} statistic that quantifies how effective a particular form is a describing a given data set.  The most commonly used goodness of fit statistic is the \emph{reduced Chi-squared statistic} defined by:  
+    \begin{equation}
+      \chi^2_\nu = \frac{1}{\nu} \sum_i \frac{\left( y_i - f(x_i) \right) ^2}{\sigma_i^2},
+    \end{equation}
+    where $x_i$ are the points of the independent variable at which data are sampled, $y_i$ are the data, $f(\cdot)$ is the function which is being fitted to the data (linear, quadratic, cubic, etc.), $\sigma_i$ is the uncertainty of measurement $y_i$ and $\nu$ is the number of degrees of freedom in your fit (the number of unknown quantities involved in the fit - the coefficients of whatever order polynomial is being fitted).  Write a function that evaluates $\chi^2_\nu$ for a polynomial fit that has been performed.  
+    \item[(d)] What order polynomial ($1 \le n \le 10$) best describes the test data?  
   \end{itemize}
   \item Bilinear interpolation:  this problem requires use of the grid and data from the repository.  
   \begin{itemize}
