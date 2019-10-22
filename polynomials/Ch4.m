@@ -3,9 +3,12 @@ x=[1,2,3,4]';
 y=2.*x.^3-3.*x.^2+4.*x+9;
 figure;
 plot(x,y,'*','MarkerSize',20);
+xlabel('x');
+ylabel('y');
+title('Illustrating various direct fit methods')
 
 
-%% Matlab built-in (direct fit)
+%% Matlab built-in (direct fit using polyfit)
 n=3;
 coeffs=polyfit(x,y,n);
 xlarge=linspace(1,4,50);
@@ -14,7 +17,7 @@ hold on;
 plot(xlarge,ylarge,'--');
 
 
-%% Another take using Matlab built-in (a direct fit)
+%% Another take using Matlab built-in (a direct fit with \)
 X=zeros(n+1,n+1);
 for icol=n+1:-1:1
     newcol=x(:).^(icol-1);
@@ -26,10 +29,15 @@ ylarge2=polyval(coeffs2,xlarge);
 plot(xlarge,ylarge2,'.','MarkerSize',20);
 
 
-%% Can use repo Gauss elimination to solve (direct fit)
+%% Can use repo Gauss elimination to solve (direct fit using our codes)
 addpath ../linear_algebra/;
 [Xmod,ord]=Gauss_elim(X,y);
 coeffs3=backsub(Xmod(ord,:));
+ylarge3=polyval(coeffs3,xlarge);
+
+plot(xlarge,ylarge3,'x')
+legend('data','polyfit','mldivide','elimination');
+
 rmpath ../linear_algebra/; 
 
 
@@ -59,7 +67,7 @@ ylabel('# of occurences');
 
 %% Linear least squares example (fitting to a line - a first-order poly)
 % y=a+b*x
-n=1000;
+n=100;
 a=2;
 b=3;
 xdata=linspace(-5,5,n);         %independent variable
@@ -93,4 +101,7 @@ legend('true function','data','linear fit');
 hold off;
 
 
-%% Illustration of bilinear interpolation
+%% Illustration of bilinear interpolation, single interval of interest
+% Manually written
+
+% Matlab version

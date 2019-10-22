@@ -1,0 +1,55 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{fullpage}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+%\usepackage{draftwatermark}
+
+%\SetWatermarkText{DRAFT}
+%\SetWatermarkScale{3}
+%\SetWatermarkLightness{0.5}
+
+\begin{document}
+
+\title{EP 501 Homework 2:  Nonlinear Equations and Root-finding}
+
+\maketitle
+
+~\\
+\textbf{Instructions:}  
+\begin{itemize}
+  \item Submit all source code and publish Matlab results in .pdf form via Canvas.  Please zip all contents of your solution into single file and then submit in a single zip file.    
+  \item Discussing the assignment with others is fine, but you must not copy anyone's code.  
+  \item I must be able to run your code and produce all results by executing a single top-level Matlab script, e.g. \textsf{assignment1.m} or similar.  
+  \item You may use any of the example codes from our course repository:  \url{https://github.com/mattzett/EP501/}.
+  \item Do not copy verbatim any other codes (i.e. any source codes other than from our course repository).  You may use other examples as a reference but you must write you own programs (except for those I give you).  
+    \item For demonstrating that your code is correct when you turn in the assignment, you must use the test problems given in the assignment text below.  
+
+\end{itemize}
+~\\~\\~\\
+\textbf{Purpose of this assignment:}  
+\begin{itemize}
+  \item Learn principles behind data fitting and polynomial approximation.  
+  \item Develop good coding and documentation practices, such that your programs are easily understood by others.  
+  \item Hone skills of developing, debugging, and testing your own software
+  \item Learn how to build programs on top of existing codes
+\end{itemize}
+
+\pagebreak
+
+\begin{enumerate}
+  \item Least squares and data fitting:  this problem requires use of the example dataset from the repository.  
+  \begin{itemize}
+    \item[(a)]  
+  \end{itemize}
+  \item Bilinear interpolation:  this problem requires use of the grid and data from the repository.  
+  \begin{itemize}
+    \item[(a)]  Write a function that takes in a grid of points describing some independent variable (say $x_i$), and a point to which the data are to be interpolated $x'$ and finds the index $i$ into the array $x_i$ such that:  $x_i \le x' \le x_{i+1}$.  
+    \item[(b)]  Use the function from part (a) to construct an additional function that works over a 2D grid $x,y$.  I.e. given two grids $x_i,y_j$ find the indices $i,j$ such that:  $x_i \le x' \le x_{i+1}$ and $y_j \le y' \le y_{j+1}$.
+    \item[(c)]  Use your results from parts a and b to create a bilinear interpolation function that takes in a sequence of data points $\{x'_k,y'_k\}$ to which data are being interpolated, a grid $x_i,y_j$, and a dataset $f_{ij}$ that is defined over this grid and produces bilinearly interpolated values of f at the points $\{x'_k,y'_k\}$.  Write your program so that the input points are simply a flat list and no necessarily a 2D grid of points.  
+    \item[(d)]  Test your results against Matlab's bilinear interpolation function and show that you get the same result.  
+  \end{itemize} 
+\end{enumerate}
+
+\end{document}
