@@ -39,23 +39,23 @@
 \pagebreak
 
 \begin{enumerate}
-  \item Least squares and data fitting:  this problem requires use of the example dataset from the repository which provides data for $x_i,y_i,\sigma_i$.  
+  \item Least squares and data fitting:  this problem requires use of the example dataset from the repository, \texttt{test\_lsq.mat}, which provides data for $x_i,y_i,\sigma_{yi}$.  
   \begin{itemize}
     \item[(a)] Write a program that performs a linear least squares fit of a set of data to a polynomial of arbitrary order $n$.
-    \item[(b)] Use this program to fit the data to a line and a quadratic form.  Plot your results and the data on the same axis so they can be easily compared.  Which fit looks better (linear or quadratic)?  
+    \item[(b)] Use this program to fit the data to a line and a quadratic form.  Plot your results and the data on the same axis so they can be easily compared.  Test your results against the built-in Matlab functions \texttt{polyfit} and \texttt{polyval}.  Which fit looks better (linear or quadratic)?  
     \item[(c)] A more rigorous way of deciding between preferred function forms in fits (e.g. linear, quadratic, cubic, quartic, etc.) is to define a \emph{goodness-of-fit} statistic that quantifies how effective a particular form is a describing a given data set.  The most commonly used goodness of fit statistic is the \emph{reduced Chi-squared statistic} defined by:  
     \begin{equation}
-      \chi^2_\nu = \frac{1}{\nu} \sum_i \frac{\left( y_i - f(x_i) \right) ^2}{\sigma_i^2},
+      \chi^2_\nu = \frac{1}{\nu} \sum_i \frac{\left( y_i - f(x_i) \right) ^2}{\sigma_{y,i}^2},
     \end{equation}
-    where $x_i$ are the points of the independent variable at which data are sampled, $y_i$ are the data, $f(\cdot)$ is the function which is being fitted to the data (linear, quadratic, cubic, etc.), $\sigma_i$ is the uncertainty of measurement $y_i$ and $\nu$ is the number of degrees of freedom in your fit (the number of unknown quantities involved in the fit - the coefficients of whatever order polynomial is being fitted).  Write a function that evaluates $\chi^2_\nu$ for a polynomial fit that has been performed.  
-    \item[(d)] What order polynomial ($1 \le n \le 10$) best describes the test data?  
+    where $x_i$ are the points of the independent variable at which data are sampled, $y_i$ are the data, $f(\cdot)$ is the function which is being fitted to the data (linear, quadratic, cubic, etc.), $\sigma_i$ is the uncertainty of measurement $y_i$ and $\nu$ is the number of degrees of freedom in your fit (number of data points minus number of parameters being estimated).  Write a function that evaluates $\chi^2_\nu$ for a polynomial fit that has been performed.  
+    \item[(d)] Use your goodness-of-fit statistic to determine whether is best (in the statistical sense) to fit these data with a linear, quadratic, or cubic polynomial.    
   \end{itemize}
   \item Bilinear interpolation:  this problem requires use of the grid and data from the repository.  
   \begin{itemize}
     \item[(a)]  Write a function that takes in a grid of points describing some independent variable (say $x_i$), and a point to which the data are to be interpolated $x'$ and finds the index $i$ into the array $x_i$ such that:  $x_i \le x' \le x_{i+1}$.  
     \item[(b)]  Use the function from part (a) to construct an additional function that works over a 2D grid $x,y$.  I.e. given two grids $x_i,y_j$ find the indices $i,j$ such that:  $x_i \le x' \le x_{i+1}$ and $y_j \le y' \le y_{j+1}$.
-    \item[(c)]  Use your results from parts a and b to create a bilinear interpolation function that takes in a sequence of data points $\{x'_k,y'_k\}$ to which data are being interpolated, a grid $x_i,y_j$, and a dataset $f_{ij}$ that is defined over this grid and produces bilinearly interpolated values of f at the points $\{x'_k,y'_k\}$.  Write your program so that the input points are simply a flat list and no necessarily a 2D grid of points.  
-    \item[(d)]  Test your results against Matlab's bilinear interpolation function and show that you get the same result.  
+    \item[(c)]  Use your results from parts a and b to create a bilinear interpolation function that takes in a sequence of data points $\{x'_k,y'_k\}$ to which data are being interpolated, a grid $x_i,y_j$, and a dataset $f_{ij}$ that is defined over this grid and produces bilinearly interpolated values of f at the points $\{x'_k,y'_k\}$.  Write your program so that the input points are simply a flat list and not necessarily a 2D grid of points.  
+    \item[(d)]  Test your results against Matlab's bilinear interpolation function (\texttt{interp2}) and show that you get the same result.  Use the test data from the repository (\texttt{test\_interp.mat}).  The source grid data are stored in \texttt{xg,yg}, while the value of the function at those points is in \texttt{f2D}.  \texttt{xgi,ygi} are the densely sampled grid point to which the data are to be interpolated for this test.  
   \end{itemize} 
 \end{enumerate}
 
