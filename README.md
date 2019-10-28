@@ -29,3 +29,19 @@ Stuff stufff stuff
 
 1)  located in ./HW2/
 
+## Nonlinear equations (Ch. 4)
+
+1)  located in ./polynomials
+2)  contains examples of direct and approximate polynomial fits to data
+
+## Third homework assignment (Ch. 4)
+
+1)  located in ./HW3/
+
+## Numerical differentiation (Ch. 5)
+
+1)  located in ./differentiation
+2)  examples of finite difference formulas and applications
+
+
+
