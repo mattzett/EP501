@@ -10,7 +10,7 @@ hold on;
 plot(x,yprime);
 
 
-%% Compute a numerical derivative
+%% Comparison of basic numerical derivative
 %second order, centered
 dy_dx=zeros(lx,1);
 dx=x(2)-x(1);
@@ -29,16 +29,27 @@ dy_dx(lx)=(y(lx)-y(lx-1))/dx;
 plot(x,dy_dx,'k--')
 
 
-%first order (backward)
-%backward difference 
-
+%first order derivative approximation (backward)
 %interior
+dy_dxbwd=zeros(lx,1);
 for ix=2:lx
-    dy_dx(ix)=(y(ix)-y(ix-1))/dx;
+    dy_dxbwd(ix)=(y(ix)-y(ix-1))/dx;
 end %for
-dy_dx(1)=dy_dx(2);
+dy_dxbwd(1)=dy_dxbwd(2);
 
-plot(x,dy_dx,'m--')
+plot(x,dy_dxbwd,'m--')
+legend('original function','analytical','centered','backward')
+xlabel('x');
+ylabel('y(x) or y''(x)');
+title('Comparison of finite difference derivative approximations');
 
 
-%% Some examples of numerical integration
+%% Demonstrate effects of grid refinement (convergence)
+lx2=256;
+x2=linspace(-10,10,lx2)';
+y2=sin(0.5*x2);
+y2prime=0.5*cos(0.5*x2);
+
+
+%% Multidimensional function and partial derivatives:  grad and div (laplacian and curl also useful)
+
