@@ -1,5 +1,5 @@
 %% Some examples of numerical differentiation
-lx=25;
+lx=20;
 x=linspace(-10,10,lx)';
 y=sin(0.5*x);
 yprime=0.5*cos(0.5*x);
@@ -42,14 +42,74 @@ legend('original function','analytical','centered','backward')
 xlabel('x');
 ylabel('y(x) or y''(x)');
 title('Comparison of finite difference derivative approximations');
+set(gca,'FontSize',24);
 
-
-%% Demonstrate effects of grid refinement (convergence)
-lx2=256;
-x2=linspace(-10,10,lx2)';
-y2=sin(0.5*x2);
-y2prime=0.5*cos(0.5*x2);
+% %% Demonstrate effects of grid refinement (convergence)
+% lx2=256;
+% x2=linspace(-10,10,lx2)';
+% y2=sin(0.5*x2);
+% y2prime=0.5*cos(0.5*x2);
 
 
 %% Multidimensional function and partial derivatives:  grad and div (laplacian and curl also useful)
+lx=20;
+ly=20;
+x=linspace(-5,5,lx);
+y=linspace(-5,5,ly);
+[X,Y]=meshgrid(x,y);
+f=exp(-(X.^2)/2/2).*exp(-Y.^2/2/1);
+
+figure;
+contourf(x,y,f);
+
+%gradient of scalar function
+dx=x(2)-x(1);
+dy=y(2)-y(1);
+
+gradx=zeros(size(f));
+grady=zeros(size(f));
+
+%x component
+for ix=2:lx-1
+    gradx(:,ix)=(f(:,ix+1)-f(:,ix-1))/2/dx;
+end %for
+gradx(:,1)=(f(:,2)-f(:,1))/dx;
+gradx(:,lx)=(f(:,lx)-f(:,lx-1))/dx;
+
+%y component
+for iy=2:ly-1
+    grady(iy,:)=(f(iy+1,:)-f(iy-1,:))/2/dy;
+end %for
+grady(1,:)=(f(2,:)-f(1,:))/dy;
+grady(ly,:)=(f(ly,:)-f(ly-1,:))/dy;
+
+%add quiver on top
+hold on;
+quiver(X,Y,gradx,grady,'Color','white','LineWidth',2);
+set(gca,'FontSize',24);
+
+f=gradx;
+g=grady;
+
+%x component
+divx=zeros(size(f));
+for ix=2:lx-1
+    divx(:,ix)=(f(:,ix+1)-f(:,ix-1))/2/dx;
+end %for
+divx(:,1)=(f(:,2)-f(:,1))/dx;
+divx(:,lx)=(f(:,lx)-f(:,lx-1))/dx;
+
+%y component
+divy=zeros(size(y));
+for iy=2:ly-1
+    divy(iy,:)=(g(iy+1,:)-g(iy-1,:))/2/dy;
+end %for
+divy(1,:)=(g(2,:)-g(1,:))/dy;
+divy(ly,:)=(g(ly,:)-g(ly-1,:))/dy;
+
+div=divx+divy;
+
+figure;
+surface(x,y,div);
+set(gca,'FontSize',24);
 

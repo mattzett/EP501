@@ -1,0 +1,67 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{fullpage}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+%\usepackage{draftwatermark}
+
+%\SetWatermarkText{DRAFT}
+%\SetWatermarkScale{3}
+%\SetWatermarkLightness{0.5}
+
+\begin{document}
+
+\title{EP 501 Homework 4:  Differentiation and Integration}
+
+\maketitle
+
+~\\
+\textbf{Instructions:}  
+\begin{itemize}
+  \item Submit all source code and publish Matlab results in .pdf form via Canvas.  Please zip all contents of your solution into single file and then submit in a single zip file.    
+  \item Discussing the assignment with others is fine, but you must not copy anyone's code.  
+  \item I must be able to run your code and produce all results by executing a single top-level Matlab script, e.g. \textsf{assignment1.m} or similar.  
+  \item You may use any of the example codes from our course repository:  \url{https://github.com/mattzett/EP501/}.
+  \item Do not copy verbatim any other codes (i.e. any source codes other than from our course repository).  You may use other examples as a reference but you must write you own programs (except for those I give you).  
+    \item For demonstrating that your code is correct when you turn in the assignment, you must use the test problems given in the assignment text below.  
+
+\end{itemize}
+~\\~\\~\\
+\textbf{Purpose of this assignment:}  
+\begin{itemize}
+  \item Learn principles behind data fitting and polynomial approximation.  
+  \item Develop good coding and documentation practices, such that your programs are easily understood by others.  
+  \item Hone skills of developing, debugging, and testing your own software
+  \item Learn how to build programs on top of existing codes
+\end{itemize}
+
+\pagebreak
+
+\begin{enumerate}
+  \item  Vector derivatives:  
+  \begin{itemize}  
+    \item[(a)] Plot the two components of the vector magnetic field defined by the piecewise function:
+    \begin{equation}
+      \mathbf{B}(x,y)= \left\{
+      \begin{array}{c}
+      \frac{\mu_0 I}{2 \pi a^2} \sqrt{x^2+y^2} \left( - \frac{y}{\sqrt{x^2+y^2}}\hat{\mathbf{e}}_x + \frac{x}{\sqrt{x^2+y^2}} \hat{\mathbf{e}}_y \right) \qquad \left( \sqrt{x^2+y^2} < a \right)
+      \\
+      \frac{\mu_0 I}{2 \pi \sqrt{x^2+y^2}} \left( - \frac{y}{\sqrt{x^2+y^2}}\hat{\mathbf{e}}_x + \frac{x}{\sqrt{x^2+y^2}} \hat{\mathbf{e}}_y \right) \qquad \left( \sqrt{x^2+y^2} \ge a \right)
+      \end{array}
+      \right.      
+    \end{equation}
+    Use an image plot (\texttt{imagesc}, \texttt{pcolor}) for each component.  Make sure you add a colorbar and axis labels to your plot.  
+    \item[(b)]  Write a function to compute the curl of a vector field, i.e. $\nabla \times \mathbf{U}$.  Compute the three components of the numerical curl of this field and plot using \texttt{imagesc}, or \texttt{pcolor}
+    \item[(c)]  Compute the curl analytically and plot this alongside your numerical approximation.  Demonstrate that they are suitably similar.  
+    \item[(d)]  Write a function to compute the Laplacian of a scalar field, i.e. $\nabla^2 T$.  Test your function using:  
+    
+  \end{itemize}
+  \item  Multidimensional integration...
+  \begin{itemize}
+    \item[(a)] 
+  \end{itemize}
+  \item Higher-order differences...
+\end{enumerate}
+
+\end{document}
