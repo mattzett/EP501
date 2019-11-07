@@ -4,11 +4,12 @@
 \usepackage{hyperref}
 \usepackage{amsmath}
 \usepackage{amssymb}
-%\usepackage{draftwatermark}
+%\usepackage{boldsymbol}
+\usepackage{draftwatermark}
 
-%\SetWatermarkText{DRAFT}
-%\SetWatermarkScale{3}
-%\SetWatermarkLightness{0.5}
+\SetWatermarkText{DRAFT}
+\SetWatermarkScale{3}
+\SetWatermarkLightness{0.5}
 
 \begin{document}
 
@@ -24,22 +25,21 @@
   \item I must be able to run your code and produce all results by executing a single top-level Matlab script, e.g. \textsf{assignment1.m} or similar.  
   \item You may use any of the example codes from our course repository:  \url{https://github.com/mattzett/EP501/}.
   \item Do not copy verbatim any other codes (i.e. any source codes other than from our course repository).  You may use other examples as a reference but you must write you own programs (except for those I give you).  
-    \item For demonstrating that your code is correct when you turn in the assignment, you must use the test problems given in the assignment text below.  
 
 \end{itemize}
 ~\\~\\~\\
 \textbf{Purpose of this assignment:}  
 \begin{itemize}
-  \item Learn principles behind data fitting and polynomial approximation.  
+  \item Deal with numerical differentiation to solve complex problems.  
   \item Develop good coding and documentation practices, such that your programs are easily understood by others.  
-  \item Hone skills of developing, debugging, and testing your own software
-  \item Learn how to build programs on top of existing codes
+  \item Exercise good judgement in numerical problem setup.
+  \item Demonstrate higher reasoning in synthesize a problem and devising a basic algorithm to solve it.  
 \end{itemize}
 
 \pagebreak
 
 \begin{enumerate}
-  \item  Vector derivatives:  
+  \item  Vector derivatives and multidimensional plotting:  
   \begin{itemize}  
     \item[(a)] Plot the two components of the vector magnetic field defined by the piecewise function:
     \begin{equation}
@@ -47,21 +47,46 @@
       \begin{array}{c}
       \frac{\mu_0 I}{2 \pi a^2} \sqrt{x^2+y^2} \left( - \frac{y}{\sqrt{x^2+y^2}}\hat{\mathbf{e}}_x + \frac{x}{\sqrt{x^2+y^2}} \hat{\mathbf{e}}_y \right) \qquad \left( \sqrt{x^2+y^2} < a \right)
       \\
-      \frac{\mu_0 I}{2 \pi \sqrt{x^2+y^2}} \left( - \frac{y}{\sqrt{x^2+y^2}}\hat{\mathbf{e}}_x + \frac{x}{\sqrt{x^2+y^2}} \hat{\mathbf{e}}_y \right) \qquad \left( \sqrt{x^2+y^2} \ge a \right)
+      \frac{\mu_0 I}{2 \pi \sqrt{x^2+y^2}} \left( - \frac{y}{\sqrt{x^2+y^2}} \hat{\mathbf{e}}_x + \frac{x}{\sqrt{x^2+y^2}} \hat{\mathbf{e}}_y \right) \qquad \left( \sqrt{x^2+y^2} \ge a \right)
       \end{array}
       \right.      
     \end{equation}
-    Use an image plot (\texttt{imagesc}, \texttt{pcolor}) for each component.  Make sure you add a colorbar and axis labels to your plot.  
-    \item[(b)]  Write a function to compute the curl of a vector field, i.e. $\nabla \times \mathbf{U}$.  Compute the three components of the numerical curl of this field and plot using \texttt{imagesc}, or \texttt{pcolor}
-    \item[(c)]  Compute the curl analytically and plot this alongside your numerical approximation.  Demonstrate that they are suitably similar.  
-    \item[(d)]  Write a function to compute the Laplacian of a scalar field, i.e. $\nabla^2 T$.  Test your function using:  
+    Use an image plot (\texttt{imagesc}, \texttt{pcolor}) for each component.  Make sure you add a colorbar and axis labels to your plot.  You will need to define a range and resolution in $x$ and $y$, and create a meshgrid from that.  Be sure to use a resolution fine enough to resolve important variations in this function.  
+    \item[(b)]  Make a quiver plot of the magnetic field; add labels, etc.
+    \item[(c)]  Write a function to compute the curl of a vector field, i.e. $\nabla \times \mathbf{U}$.  Compute the three components of the numerical curl of this field and plot using \texttt{imagesc}, or \texttt{pcolor}
+    \item[(d)]  Compute the curl analytically and plot this alongside your numerical approximation.  Demonstrate that they are suitably similar.  
+    \item[(e)]  Compute and plot the scalar field:
+    \begin{equation}
+    \Phi(x,y)=\frac{q}{4 \pi \epsilon_0} \frac{e^{-\alpha \sqrt{x^2+y^2} }}{\sqrt{x^2+y^2}} \left(1+\frac{\alpha \sqrt{x^2+y^2}} {2} \right)
+    \end{equation}
+    Make sure you avoid having $(x,y)=(0,0)$ in your grid (the function is singular at this point).  This is probably best done by implementing a ``regulator'' that enforces some minimum value for $x$ and $y$.  Be sure to use a resolution fine enough to resolve important variations in this function.
+    \item[(e)]  Write a function to compute the Laplacian of a scalar field, i.e. $\nabla^2 \Phi$.  Compute the numerical Laplacian of the function:
+    
     
   \end{itemize}
-  \item  Multidimensional integration...
+  \item  Integration in multiple dimensions.  
   \begin{itemize}
-    \item[(a)] 
+    \item[(a)] Numerically compute the electrostatic energy per unit length, defined by the integral:  
+    \begin{equation}
+      W_E = - \iint \left( \epsilon_0 \nabla^2 \Phi \right) \Phi dy dx
+    \end{equation}
+    using a method that you have coded yourself.  
+    \item[(b)]  Compute and plot the parametric path
+    \begin{equation}
+       \mathbf{r}(\phi) = \cos \phi ~ \hat{\mathbf{e}}_x + \sin \phi ~ \hat{\mathbf{e}}_y \qquad (0 \le \phi \le 2 \pi)
+    \end{equation}    
+    in the $x,y$ plane on the same axis as your magnetic field components (plot the path in each).  You will need to define a grid in $\phi$ to do this.
+    \item[(c)]  Plot the two components of the magnetic field at the $x,y$ points along $\mathbf{r}$ and visually compare against your image plots of the magnetic field.  
+    \item[(d)]  Numerically compute the tangent vector to the path $\mathbf{r}$ by performing the derivative:  $d \mathbf{r} / d \phi$.  Compare your numerical results against the analytical derivative (e.g. plot the two) and adjust your grid in $\phi$ such that you get visually acceptable results.  
+    \item[(e)]  Numerically compute the magnetic field integrated around the path $\mathbf{r}$, i.e.:
+    \begin{equation}
+       \int_{\mathbf{r}} \mathbf{B} \cdot d \mathbf{\ell} 
+    \end{equation}
+    where the differential path length is given by:
+    \begin{equation}
+      d \ell = \frac{d \mathbf{r}}{d \phi} d \phi 
+    \end{equation}    
   \end{itemize}
-  \item Higher-order differences...
 \end{enumerate}
 
 \end{document}

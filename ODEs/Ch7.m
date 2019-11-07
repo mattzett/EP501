@@ -4,13 +4,23 @@
 %% Test problem
 
 
-%% Forward Euler Solution
+%% Forward Euler solution
 
 
-%% Backward Euler Solution
+%% Backward Euler solution
 
 
 %% Illustration of stability
 
+
 %% Illustration of convergence
+
+
+%% Second order method; RK2
+
+
+%% RK2 stability considerations
+
+
+
 
