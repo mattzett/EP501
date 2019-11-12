@@ -4,11 +4,11 @@
 \usepackage{hyperref}
 \usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage{draftwatermark}
+%\usepackage{draftwatermark}
 
-\SetWatermarkText{DRAFT}
-\SetWatermarkScale{3}
-\SetWatermarkLightness{0.5}
+%\SetWatermarkText{DRAFT}
+%\SetWatermarkScale{3}
+%\SetWatermarkLightness{0.5}
 
 \begin{document}
 
@@ -32,7 +32,7 @@
   \item Deal with numerical differentiation to solve complex problems.  
   \item Develop good coding and documentation practices, such that your programs are easily understood by others.  
   \item Exercise good judgement in numerical problem setup.
-  \item Demonstrate higher reasoning in synthesize a problem and devising a basic algorithm to solve it.  
+  \item Demonstrate higher reasoning to synthesize a problem and devise a basic algorithm to solve it.  
 \end{itemize}
 
 \pagebreak
@@ -50,36 +50,58 @@
       \end{array}
       \right.      
     \end{equation}
-    Use an image plot (\texttt{imagesc}, \texttt{pcolor}) for each component.  Make sure you add a colorbar and axis labels to your plot.  You will need to define a range and resolution in $x$ and $y$, and create a meshgrid from that.  Be sure to use a resolution fine enough to resolve important variations in this function.  
-    \item[(b)]  Make a quiver plot of the magnetic field; add labels, etc.
-    \item[(c)]  Write a function to compute the curl of a vector field, i.e. $\nabla \times \mathbf{U}$.  Compute the three components of the numerical curl of this field and plot using \texttt{imagesc}, or \texttt{pcolor}
-    \item[(d)]  Compute the curl analytically and plot this alongside your numerical approximation.  Demonstrate that they are suitably similar.  
+    Assume the parameters in this equation have the values:
+    \begin{eqnarray}
+      I &=& 10 \qquad \left( \mathrm{A} \right) \nonumber \\
+      \mu_0 &=& 4 \pi \times 10^{-7} \qquad (\mathrm{H/m}) \nonumber \\
+      a &=& 0.005 \qquad (\mathrm{m}) \nonumber 
+    \end{eqnarray}
+    Use an image plot (\texttt{imagesc}, \texttt{pcolor}) for each component and have your plot show the region $-3 a \le x \le 3 a, -3a \le y \le 3a$.  Make sure you add a colorbar and axis labels to your plot.  You will need to define a range and resolution in $x$ and $y$, and create a meshgrid from that.  Be sure to use a resolution fine enough to resolve important variations in this function.  
+    \item[(b)]  Make a quiver plot of the magnetic field $\mathbf{B}$; add labels, etc.
+    \item[(c)]  Compute the numerical curl of $\mathbf{B}$, i.e. $\nabla \times \mathbf{B}$.  Use centered differences on the interior grid points and first-order derivatives on the edges.  Plot your result using \texttt{imagesc}, or \texttt{pcolor}.  
+    \item[(d)]  Compute $\nabla \times \mathbf{B}$ analytically.  Plot the  alongside your numerical approximation.  Demonstrate that they are suitably similar.  
     \item[(e)]  Compute and plot the scalar field:
+%    \begin{equation}
+%    \Phi(x,y,z)=\frac{q}{4 \pi \epsilon_0} \frac{e^{-\alpha \sqrt{x^2+y^2+z^2} }}{\sqrt{x^2+y^2+z^2}} \left(1+\frac{\alpha \sqrt{x^2+y^2+z^2}} {2} \right)
+%    \end{equation}
     \begin{equation}
-    \Phi(x,y)=\frac{q}{4 \pi \epsilon_0} \frac{e^{-\alpha \sqrt{x^2+y^2} }}{\sqrt{x^2+y^2}} \left(1+\frac{\alpha \sqrt{x^2+y^2}} {2} \right)
+      \Phi(x,y,z)= \left\{
+      \begin{array}{c}
+      \frac{Q}{4 \pi \epsilon_0 a} - \frac{Q}{8 \pi \epsilon_0 a^3} \left(x^2+y^2+z^2 - a^2 \right)
+      \qquad \left( \sqrt{x^2+y^2+z^2} < a \right)
+      \\
+      \frac{Q}{4 \pi \epsilon_0 \sqrt{x^2+y^2+z^2}} \qquad \left( \sqrt{x^2+y^2+z^2} \ge a \right)
+      \end{array}
+      \right.      
     \end{equation}
-    Make sure you avoid having $(x,y)=(0,0)$ in your grid (the function is singular at this point).  This is probably best done by implementing a ``regulator'' that enforces some minimum value for $x$ and $y$.  Be sure to use a resolution fine enough to resolve important variations in this function.
-    \item[(e)]  Write a function to compute the Laplacian of a scalar field, i.e. $\nabla^2 \Phi$.  Compute the numerical Laplacian of the function:
+    Use the parameters:
+    \begin{eqnarray}
+      Q &=& 1  \qquad \left( \mathrm{C} \right) \nonumber \\
+      a &=& 1 \qquad (\mathrm{m}) \nonumber \\
+      \epsilon_0 &=& 8.854 \times 10^{-12} \qquad (\mathrm{F/m}) \nonumber 
+    \end{eqnarray}    
+    and plot this function in the region $-3a \le x \le 3a, -3a \le y \le 3a$ in the $z=0$ plane. Be sure to use a resolution fine enough to resolve variations in this function (aside from those associated with the singularity).
+    \item[(e)]  Write a function to numerically compute the Laplacian of a scalar field, i.e. $\nabla^2 \Phi$.  Plot your result and include appropriate labels and colorbars.  
     
     
   \end{itemize}
   \item  Integration in multiple dimensions.  
   \begin{itemize}
-    \item[(a)] Numerically compute the electrostatic energy per unit length, defined by the integral:  
+    \item[(a)] Numerically compute the electrostatic energy in the region $R \equiv -3a \le x \le 3a, -3a \le y \le 3a, -3a \le z \le 3a$, defined by the integral:  
     \begin{equation}
-      W_E = - \iint \left( \epsilon_0 \nabla^2 \Phi \right) \Phi dy dx
+      W_E = - \frac{1}{2} \iiint_R \left( \epsilon_0 \nabla^2 \Phi \right) \Phi ~dx dy dz
     \end{equation}
-    using a method that you have coded yourself.  
+    using a iterated trapezoidal or multi-dimensional trapezoidal method.  
     \item[(b)]  Compute and plot the parametric path
     \begin{equation}
-       \mathbf{r}(\phi) = \cos \phi ~ \hat{\mathbf{e}}_x + \sin \phi ~ \hat{\mathbf{e}}_y \qquad (0 \le \phi \le 2 \pi)
+       \mathbf{r}(\phi) \equiv x(\phi)\hat{\mathbf{e}}_x + y(\phi)\hat{\mathbf{e}}_y = r_0 \cos \phi ~ \hat{\mathbf{e}}_x + r_0 \sin \phi ~ \hat{\mathbf{e}}_y \qquad (0 \le \phi \le 2 \pi)
     \end{equation}    
-    in the $x,y$ plane on the same axis as your magnetic field components (plot the path in each).  You will need to define a grid in $\phi$ to do this.
-    \item[(c)]  Plot the two components of the magnetic field at the $x,y$ points along $\mathbf{r}$ and visually compare against your image plots of the magnetic field.  
-    \item[(d)]  Numerically compute the tangent vector to the path $\mathbf{r}$ by performing the derivative:  $d \mathbf{r} / d \phi$.  Compare your numerical results against the analytical derivative (e.g. plot the two) and adjust your grid in $\phi$ such that you get visually acceptable results.  
+    in the $x,y$ plane on the same axis as your magnetic field components from the previous problem (plot the path in the figure for each component).  Take $r_0 = 2a$.  You will need to define a grid in $\phi$ to do this.
+    \item[(c)]  Plot the two components of the magnetic field $\mathbf{B}(x(\phi),y(\phi))$ at the $x,y$ points along $\mathbf{r}$ (I recommend \texttt{plotyy} for this) and visually compare against your image plots of the magnetic field.  
+    \item[(d)]  Numerically compute the tangent vector to the path $\mathbf{r}$ by performing the derivative:  $d \mathbf{r} / d \phi$.  Compare your numerical results against the analytical derivative (e.g. plot the two) and refine your grid in $\phi$ (if necessary) such that you get visually acceptable results - i.e. such that the path appears circular.  
     \item[(e)]  Numerically compute the magnetic field integrated around the path $\mathbf{r}$, i.e.:
     \begin{equation}
-       \int_{\mathbf{r}} \mathbf{B} \cdot d \boldsymbol{\ell} 
+       \frac{1}{\mu_0} \int_{\mathbf{r}} \mathbf{B} \cdot d \boldsymbol{\ell} 
     \end{equation}
     where the differential path length is given by:
     \begin{equation}
