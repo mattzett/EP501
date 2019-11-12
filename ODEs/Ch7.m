@@ -144,3 +144,19 @@ comet3(x,y,z)
 
 
 
+%% One dimensional boundary value problems (direct)
+addpath ../linear_algebra;
+
+
+
+rmpath ../linear_algebra;
+
+
+%% 1D BVP iterative methods
+addpath ../linear_algebra;
+
+
+
+rmpath ../linear_algebra;
+
+
