@@ -4,15 +4,15 @@
 \usepackage{hyperref}
 \usepackage{amsmath}
 \usepackage{amssymb}
-%\usepackage{draftwatermark}
+\usepackage{draftwatermark}
 
-%\SetWatermarkText{DRAFT}
-%\SetWatermarkScale{3}
-%\SetWatermarkLightness{0.5}
+\SetWatermarkText{DRAFT}
+\SetWatermarkScale{3}
+\SetWatermarkLightness{0.5}
 
 \begin{document}
 
-\title{EP 501 Homework 4:  Differentiation, Integration, and Multidimensional functions}
+\title{EP 501 Homework 5:  Ordinary Differential Equations}
 
 \maketitle
 
@@ -38,10 +38,56 @@
 \pagebreak
 
 \begin{enumerate}
-  \item    
+  \item  The electrostatic potential in a region $-a \le x \le a$ with continuously varying dielectric material having dielectric function $\epsilon(x)$, is governed by the equation:  
+  \begin{equation}
+    \epsilon \frac{d^2 \Phi}{d x^2} + \frac{d \epsilon} {d x} \frac{d \Phi}{d x} = 0 
+  \end{equation}
+  Suppose the dielectric function takes the form:
+  \begin{equation}
+    \epsilon(x) = \epsilon_0 \left( 2 - \frac{1}{2} \tanh \left( \frac{x-x'}{\ell}\right) + \frac{1}{2} \tanh \left( \frac{x-x''}{\ell}\right) \right)
+  \end{equation} 
+  with parameters:
+  \begin{eqnarray}
+  a &=& 0.01 \qquad (\mathrm{m}) \nonumber \\
+  \ell &=& \frac{a}{5} \qquad (\mathrm{m}) \nonumber \\
+  x' &=& -\frac{9a}{10} \qquad (\mathrm{m}) \nonumber \\
+  x'' &=& \frac{9a}{10} \qquad (\mathrm{m}) \nonumber  
+  \end{eqnarray}  
+  The boundary conditions for this system are given by:
+  \begin{eqnarray}
+  \frac{d \Phi}{d x}(-a) &=& 0 \qquad (\mathrm{V}) \nonumber \\
+  \Phi(a) &=& 100 \qquad (\mathrm{V}) \nonumber
+  \end{eqnarray}     
   \begin{itemize}
-    \item[(a)]  
+    \item[(a)]  Plot the dielectric function and note that it varies rapidly near the edges of the domain of interest.
+    \item[(b)]  Develop a system of finite difference equations for this system based on second order accurate centered differences.  Include this system in your homework submission.
+    \item[(c)]  Develop two finite difference equations for the boundary conditions of this system.  Use a first-order forward difference at the $x=-a$ boundary.  Include these equations with your submission.  
+    \item[(d)]  Solve your system of equations using the direct Gaussian elimination solver in the course repository.
+    \item[(e)]  Solve your system of equations using the iterative Jacobi solver in the course repository.
+    \item[(f)]  Repeat steps d-e using grids of 100,500,1000, and 1500 points and time your results (\texttt{tic} and \texttt{toc} in matlab.  Which solver is the fastest?  Does it depend on the number of grid points?
+    \item[(g)]  Since the dielectric function varies rapidly at the boundary, this is a problem where a second order (forward) difference may be useful (see course notes for formula).  Reformulate your matrix system to include this for the $x=-a$ boundary and solve the system numerically for 50 grids points.  Plot the result and compare it against the solution with a first order forward difference.  
   \end{itemize}
+  \item  Consider a charged particle immersed in a magnetic field $\mathbf{B} = B \hat{\mathbf{e}}_z$.  If the field is uniform and the particle is given an initial velocity the particle will oscillate in a perfect circular motion as shown in class an in the example system of ODEs in the course repository, which solves the system of equations:
+    \begin{equation}
+      m \frac{d \mathbf{v}}{dt} = q \mathbf{v} \times \mathbf{B}
+    \end{equation}  
+    ($\mathbf{v}=v_x \hat{\mathbf{e}}_x + v_y \hat{\mathbf{e}}_y$) using a two-step, second order accurate Runge-Kutta method.  Assume that the $v_z$ is constant with time.  
+  \begin{itemize}
+    \item[(a)]  Solve this system with the RK4 algorithm and plot the velocity and position as a function of time.  Compare this against the RK2 solution in the repository and show they are roughly equal.  Use 100 time steps per particle oscillation period $T=\frac{2 \pi m}{q B}$.  
+    \item[(b)]  Show that the RK4 solution is better in the sense that it can solve the problem accurately with fewer time steps.  
+    \item[(c)]  Suppose the magnetic field is changed to vary linearly in the $y$-direction:
+    \begin{equation}
+      \mathbf{B}(y) = B \left( 1+\frac{1}{2}y \right) \hat{\mathbf{e}}_z
+    \end{equation}
+    Use your RK4 solver to solve for and plot the velocities and path of the particle in the $x$-$y$ plane for a least five periods of oscillation.  HINT:  The particle should execute trochoidal motion.  
+  \end{itemize} 
+  \item \emph{Efficiently} solve the system of equations:
+  \begin{eqnarray}
+    \frac{d y_1}{d t} &=& 998 y_1 +1998 y_2 \\
+    \frac{d y_2}{d t} &=& -999 y_1 -1999 y_2
+  \end{eqnarray}
+    for $0 \le t \le 0.5$ if $y_1(0)=y_2(0)=1$.  It is only necessary to resolve the longest time scale present in this system and a first-order accurate solution is acceptable.  You may use any codes that we have developed in the course repository.  Points will be deducted for solutions using a method that requires an overly large number of time steps.  
+
 \end{enumerate}
 
 \end{document}
