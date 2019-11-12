@@ -1,3 +1,6 @@
+clear,clc,close all;
+
+
 %% Gridding in time
 N=25;
 tmin=0;
@@ -114,7 +117,7 @@ B=10000e-9;
 omega=q*B/m;
 tmin=0;
 tmax=2*2*pi/abs(omega);
-t=linspace(tmin,tmax,20);
+t=linspace(tmin,tmax,50);
 dt=t(2)-t(1);
 lt=numel(t);
 
@@ -123,25 +126,68 @@ vy=zeros(1,lt);
 vy(1)=1e3;
 vx(1)=1e3;
 for n=2:lt
+    %step x and y components together, this is the half update
     vxhalf=vx(n-1)+dt/2*(omega*vy(n-1));
     vyhalf=vy(n-1)-dt/2*(omega*vx(n-1));
     
+    %now the full update
     vx(n)=vx(n-1)+dt*(omega*vyhalf);
     vy(n)=vy(n-1)-dt*(omega*vxhalf);    
 end %for
 figure;
-plotyy(t,vx,t,vy);
+ax=plotyy(t,vx,t,vy);
+set(ax(1),'FontSize',20);
+set(ax(2),'FontSize',20);
+xlabel('time (s)');
+ylabel(ax(1),'v_x');
+ylabel(ax(2),'v_y');
 
-x=cumtrapz(t,vx);
+
+%integrate velocity to get position as a fn. of time
+x=cumtrapz(t,vx);    %Matlab built-in for accumulating an integral value
 y=cumtrapz(t,vy);
 vz=1e3;
 z=vz*t;
+
+%comet plot demo
 figure;
 comet3(x,y,z)
+set(gca,'FontSize',20);
+xlabel('x');
+ylabel('y');
+zlabel('z');
 
 
-%% Handling multiple time scales (ODE stiffness, book examples)
+%% Handling multiple time scales (ODE stiffness, book example from Gear's paper)
+% dy/dx=-alpha*(y=F(t))+F'(t)
+% y(t)=(y0-F(0))exp(-alpha*t)+F(t)
+y0=1;
+alpha=1000;
+figure;
 
+tsmin=0;
+tsmax=4;
+dts=0.002;
+ts=tsmin:dts:tsmax;
+ybar=(y0-2)*exp(-alpha*ts)+ts+2;
+Ns=numel(ts);
+
+plot(ts,ybar);
+hold on;
+
+yfwds=zeros(1,Ns);
+yfwds(1)=y0;
+ybwds=zeros(1,Ns);
+ybwds(1)=y0;
+for n=2:Ns
+    yfwds(n)=yfwds(n-1)+dts*(-1000*(yfwds(n-1)-ts(n-1)-2)+1);
+    ybwds(n)=(ybwds(n-1)+1000*ts(n-1)*dts+2001*dts)/(1+1000*dts);    
+end %for
+plot(ts,yfwds);
+plot(ts,ybwds);
+axis([0 4 1 6]);
+set(gca,'FontSize',20);
+legend('theory','fwd','bwd')
 
 
 %% One dimensional boundary value problems (direct)
