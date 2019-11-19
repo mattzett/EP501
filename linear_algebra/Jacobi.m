@@ -42,7 +42,7 @@ while(difftot>tol && it<=maxit)
         fprintf('it=%d; difftot = %e\n',it,difftot);
     end %if
     
-    if (difftot>difftotprev)
+    if (difftot>difftotprev & it>2)
         error('Solution appears to be diverging, check diagonal dominance...')
     end %if
     it=it+1;

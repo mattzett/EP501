@@ -3,8 +3,8 @@ addpath ../linear_algebra;
 
 
 %% Define a 2D grid in x,y for a test problem
-lx=25;
-ly=25;
+lx=256;
+ly=256;
 N=lx*ly;
 a=1;
 b=a;     %use a square region for a test problem
@@ -21,6 +21,7 @@ f1=zeros(lx,1);
 f2=sin(2*pi*x);
 g1=zeros(1,ly);
 g2=zeros(1,ly);
+b=zeros(N,1);
 
 
 %% Setup of matrix for solving FDEs system size is NxN=lx*ly x lx*ly
@@ -62,25 +63,87 @@ for j=1:ly
 end %for
 
 
-
-%% Execute of solution for our matrix system with self-coded solver from repo (direct, Gaussian elim.)
-
-
-
 %% Solution with the built-in Matlab matrix solver
+disp('Solve time for backslash:  ');
+tic
+Phimatlab=M\b;
+Phimatlab=reshape(Phimatlab,[lx,ly])';
+toc
+
+figure;
+subplot(1,4,1);
+imagesc(x,y,Phimatlab);
+axis xy;
+c=colorbar;
+xlabel('x');
+ylabel('y');
+title('Matlab Solution');
+ylabel(c,'Voltage (V)');
+set(gca,'FontSize',20);
 
 
+% %% Execute of solution for our matrix system with self-coded solver from repo (direct, Gaussian elim.)
+% verbose=false;
+% disp('Solve time for repo Gauss elim:  ');
+% tic
+% [Mmod,ord]=Gauss_elim(M,b,verbose);
+% PhiGauss=backsub(Mmod(ord,:));
+% PhiGauss=reshape(PhiGauss,[lx,ly])';
+% toc
+% 
+% subplot(1,4,2);
+% imagesc(x,y,PhiGauss);
+% axis xy;
+% c=colorbar;
+% xlabel('x');
+% ylabel('y');
+% title('Gauss-Elim Solution');
+% ylabel(c,'Voltage (V)');
+% set(gca,'FontSize',20);
 
-%% Solution with Jacobi iterative solver from repo
+
+% %% Solution with Jacobi iterative solver from repo
+% verbose=false;  
+% tol=1e-6;
+% Phi0=zeros(N,1);
+% disp('Solve time for repo Jacobi iter:  ');
+% tic
+% [PhiJacobi,nit]=Jacobi(Phi0,-1*M,-1*b,tol,verbose);
+% PhiJacobi=reshape(PhiJacobi,[lx,ly])';
+% toc
+% 
+% subplot(1,4,3);
+% imagesc(x,y,PhiJacobi);
+% axis xy;
+% c=colorbar;
+% xlabel('x');
+% ylabel('y');
+% title('Jacobi Iterations Solution');
+% ylabel(c,'Voltage (V)');
+% set(gca,'FontSize',20);
 
 
-
-%% Plot our solutions
-
+%% Check performace when using sparse storage
+Ms=sparse(M);
+disp('Solve time for sparse backslash:  ');
+tic
+Phismatlab=Ms\b;
+Phismatlab=reshape(Phismatlab,[lx,ly])';
+toc
 
 
 %% Compute and plot the analytical solution (see https://github.com/gemini3d/GEMINI-docs/blob/master/test_descriptions/GEMINItests.pdf for a derivation)
+Phiexact=sinh(2*pi*Y)./sinh(2*pi).*sin(2*pi*X);
 
+subplot(1,4,4);
+imagesc(x,y,Phiexact);
+axis xy;
+c=colorbar;
+xlabel('x');
+ylabel('y');
+title('Exact Solution');
+ylabel(c,'Voltage (V)');
+set(gca,'FontSize',20);
 
 
 %% Reset paths when we are done (for consistency, cleanliness)
