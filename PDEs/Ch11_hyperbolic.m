@@ -17,4 +17,6 @@ dt=0.1;              %time step
 %% Upwinding, Godunov's method
 
 
+%% Illustration of conditional stability
+
 
