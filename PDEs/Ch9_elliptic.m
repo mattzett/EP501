@@ -63,7 +63,7 @@ end %for
 
 
 
-%% Execute of solution for our matrix system with self-coded solver from repo (direct)
+%% Execute of solution for our matrix system with self-coded solver from repo (direct, Gaussian elim.)
 
 
 
@@ -75,7 +75,7 @@ end %for
 
 
 
-%% Plot our solution
+%% Plot our solutions
 
 
 
