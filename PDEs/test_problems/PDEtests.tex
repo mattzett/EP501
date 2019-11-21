@@ -32,7 +32,7 @@
 
 \section{Parabolic solver test problem}
 
-As discussed in the formulation document \url{https://github.com/gemini3d/GEMINI-docs/blob/master/formulation/GEMINI.pdf}, the parabolic portions of the energy equations are solved using implicit finite difference methods (including TRBDF2 and backward Euler).  These are tested via solution of a simple heat equation describing the evolution of temperature $T(z,t)$ in space and time subject to uniform thermal conduction:
+A PDE test parabolic problem that is useful is a simple heat equation describing the evolution of temperature $T(z,t)$ in space and time subject to uniform thermal conduction:
 \begin{equation}
 \frac{\partial T}{\partial t} - \lambda \frac{\partial^2 T}{\partial z^2} = 0.
 \end{equation}
@@ -101,7 +101,7 @@ T(z,t) = e^{-4 \pi^2 \lambda t} \sin \left( 2 \pi z \right)+e^{-64 \pi^2 \lambda
 
 \section{Elliptic solver test problem}
 
-The elliptic potential solver is tested using a simplified 2D test problem, Laplace's equation:
+The elliptic potential solver can tested using a simplified 2D test problem, Laplace's equation:
 \begin{equation}
 \frac{\partial^2 \Phi}{\partial x^2} + \frac{\partial^2 \Phi}{\partial y^2} = 0, 
 \end{equation}
@@ -140,7 +140,7 @@ All potential solutions currently in GEMINI are two-dimensional so this particul
 
 \section{Hyperbolic solver test problem}
 
-The advection solver in GEMINI deals with problems of the form:
+The advection (hyperbolic) solver deals with problems of the form:
 \begin{equation}
 \frac{\partial \rho}{\partial t} + \frac{\partial}{\partial z} \left( \rho v \right) = 0,  
 \end{equation}
