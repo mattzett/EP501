@@ -8,15 +8,15 @@ dx=x(2)-x(1);        %grid spacing
 dt=0.1;              %time step
 
 
+%% Upwinding and Godunov's method
+
+
 %% Lax method
 
 
 %% Lax-Wendroff
 
 
-%% Upwinding, Godunov's method
-
-
-%% Illustration of conditional stability
+%% Problems with implicit approaches to waves
 
 
