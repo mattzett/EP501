@@ -44,7 +44,8 @@
   \end{equation}
   Suppose the dielectric function takes the form:
   \begin{equation}
-    \epsilon(x) = \epsilon_0 \left( 2 - \frac{1}{2} \tanh \left( \frac{x-x'}{\ell}\right) + \frac{1}{2} \tanh \left( \frac{x-x''}{\ell}\right) \right)
+%    \epsilon(x) = \epsilon_0 \left( 10 - \frac{10}{2} \tanh \left( \frac{x-x'}{\ell}\right) + \frac{10}{2} \tanh \left( \frac{x-x''}{\ell}\right) \right)
+    \epsilon(x) = \epsilon_0 \left( 10 \tanh \left( \frac{x-x'}{\ell}\right) - 10 \tanh \left( \frac{x-x''}{\ell}\right) \right)
   \end{equation} 
   with parameters:
   \begin{eqnarray}
@@ -55,17 +56,15 @@
   \end{eqnarray}  
   The boundary conditions for this system are given by:
   \begin{eqnarray}
-  \frac{d \Phi}{d x}(-a) &=& (not) 0 \qquad (\mathrm{V}) \nonumber \\
+  \frac{d \Phi}{d x}(-a) &=& 1000 \qquad (\mathrm{V/m}) \nonumber \\
   \Phi(a) &=& 100 \qquad (\mathrm{V}) \nonumber
   \end{eqnarray}     
   \begin{itemize}
     \item[(a)]  Plot the dielectric function and note that it varies rapidly near the edges of the domain of interest.
     \item[(b)]  Develop a system of finite difference equations for this system based on second order accurate centered differences (numerical differences may also be used for dielectric function derivatives).  Include this system in your homework submission.
     \item[(c)]  Develop two finite difference equations for the boundary conditions of this system.  Use a first-order forward difference at the $x=-a$ boundary.  Include these equations with your submission.  
-    \item[(d)]  Solve your system of equations using the direct Gaussian elimination solver in the course repository.
-    \item[(e)]  Solve your system of equations using the MATLAB ``$\backslash$'' operator.
-    \item[(f)]  Repeat steps d-e using grids of 100,500,1000, and 1500 points and time your results (\texttt{tic} and \texttt{toc} in matlab.  Which solver is the fastest?  Does it depend on the number of grid points?
-    \item[(g)]  Since the dielectric function varies rapidly at the boundary, this is a problem where a second order (forward) difference may be useful (see course notes for formula).  Reformulate your matrix system to include this for the $x=-a$ boundary and solve the system numerically for 50 grids points.  Plot the result and compare it against the solution with a first order forward difference.  
+    \item[(d)]  Solve your system of equations using the MATLAB ``$\backslash$'' operator.
+    \item[(e)]  Since the dielectric function varies rapidly at the boundary, this is a problem where a second order (forward) difference may be useful (see course notes for formula).  Reformulate your matrix system to include this for the $x=-a$ boundary and solve the system numerically for 20 grids points.  Plot the result and compare it against the solution with a first order forward difference.  
   \end{itemize}
   \item  Consider a charged particle immersed in a magnetic field $\mathbf{B} = B \hat{\mathbf{e}}_z$.  If the field is uniform and the particle is given an initial velocity the particle will oscillate in a perfect circular motion as shown in class an in the example system of ODEs in the course repository, which solves the system of equations:
     \begin{equation}

@@ -190,19 +190,3 @@ set(gca,'FontSize',20);
 legend('theory','fwd','bwd')
 
 
-%% One dimensional boundary value problems (direct)
-addpath ../linear_algebra;
-
-
-
-rmpath ../linear_algebra;
-
-
-%% 1D BVP iterative methods
-addpath ../linear_algebra;
-
-
-
-rmpath ../linear_algebra;
-
-
