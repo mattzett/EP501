@@ -8,8 +8,7 @@ dx=x(2)-x(1);        %grid spacing
 v=1;            %velocity of wave propagation
 targetCFL=0.9;
 dt=targetCFL*dx/v;
-dt=0.015;              %time step
-t=0:dt:10;
+t=0:dt:50*dt;
 lt=numel(t);
 
 
@@ -74,73 +73,31 @@ set(gca,'FontSize',24);
 % 
 
 
-%% Lax-Friedrich's method
+%% Lax-Friedrichs and Lax-Wendroff comparison
 figure(3);
 
 flax=zeros(lx,lt);
 flax(:,1)=finitial;
 
-% %ghost cell values for implementing boundary conditions
-% fleft=zeros(2,1);
-% fright=zeros(2,1);
-
+flw=zeros(lx,lt);
+flw(:,1)=finitial;
 for n=1:lt-1
     flax(:,n+1)=LaxFried(dt,dx,v,flax(:,n));
+    flw(:,n+1)=LaxWen(dt,dx,v,flw(:,n));
     
-    plot(x,flax(:,n));
+    plot(x,flax(:,n+1),x,flw(:,n+1));
+    legend('Lax-F','Law-W')
     xlabel('x');
     ylabel('f(x,t)');
-    title('L-F');
+    title(sprintf('Solver comparison, t=%5.3f',t(n)));
     set(gca,'FontSize',24);
     pause(0.1);
 end %for
 
 
-% %% Lax-Wendroff
-% figure(4);
-% 
-% flw=zeros(lx,lt);
-% flw(:,1)=finitial;
-% 
-% %ghost cell values for implementing boundary conditions
-% fleft=zeros(2,1);
-% fright=zeros(2,1);
-% fhalf=zeros(lx+1,1);
-% 
-% for n=1:lt-1
-%     fleft=flw(lx-1:lx,n);    %ghost cells here implement periodic boundary conditions
-%     fright=flw(1:2,n);
-%     
-%     %half step lax-f update for cell edges. note indexing for fhalf,
-%     %i->i-1/2, i+1->i+1/2
-%     fhalf(1)=1/2*(fleft(2)+flw(1,n))-dt/2/dx*v*(flw(1,n)-fleft(2));
-%     for i=2:lx     %interior grid points
-%         fhalf(i)=1/2*(flw(i-1,n)+flw(i,n))-dt/2/dx*v*(flw(i,n)-flw(i-1,n));
-%     end %for
-%     fhalf(lx+1)=1/2*(flw(lx,n)+fright(1))-dt/2/dx*v*(fright(1)-flw(lx,n));
-%     
-%     %full time step LW update
-%     flw(1,n+1)=flw(1,n)-dt/dx*v*(fhalf(2)-fhalf(1));
-%     for i=2:lx-1     %interior grid points    
-%       flw(i,n+1)=flw(i,n)-dt/dx*v*(fhalf(i+1)-fhalf(i));
-%     end %for
-%     flw(lx,n+1)=flw(lx,n)-dt/dx*v*(fhalf(lx+1)-fhalf(lx));
-%     
-%     plot(x,flw(:,n));
-%     xlabel('x');
-%     ylabel('f(x,t)');
-%     title('L-W');
-%     set(gca,'FontSize',24);
-%     pause(0.1);
-% end %for
+%% Upwinding and Godunov's method
 
-
-%% Upwinding 
 
 
 %% Problems with implicit approaches to waves
-
-
-%% Godunov's method
-
 
