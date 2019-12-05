@@ -20,13 +20,6 @@ finitial=exp(-(x-x0).^2/2/sigx^2);
 %finitial=exp(-(x-x0).^20/2/sigx^20);
 
 
-figure(1);
-plot(x,finitial);
-xlabel('x');
-ylabel('f(x,t_0)');
-set(gca,'FontSize',24);
-
-
 %% Analytical solution
 % fexact=zeros(lx,lt);
 % fexact(:,1)=finitial;
@@ -102,5 +95,10 @@ for n=1:lt-1
     ylabel('f(x,t)');
     title(sprintf('Solver comparison, t=%5.3f',t(n)));
     set(gca,'FontSize',24);
-    pause(0.1);
+    
+    if (n==1)
+        pause;
+    else
+        pause(0.1);
+    end %if
 end %for
