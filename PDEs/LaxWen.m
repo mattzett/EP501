@@ -18,6 +18,7 @@ end %for
 fhalf(lx+1)=1/2*(f(lx)+fright(1))-dt/2/dx*v*(fright(1)-f(lx));
 
 %full time step LW update
+fnew=zeros(size(f));
 fnew(1)=f(1)-dt/dx*v*(fhalf(2)-fhalf(1));
 for i=2:lx-1     %interior grid points
     fnew(i)=f(i)-dt/dx*v*(fhalf(i+1)-fhalf(i));

@@ -8,7 +8,8 @@ dx=x(2)-x(1);        %grid spacing
 v=1;            %velocity of wave propagation
 targetCFL=0.9;
 dt=targetCFL*dx/v;
-t=0:dt:50*dt;
+N=75;           %number of time steps to take
+t=0:dt:N*dt;
 lt=numel(t);
 
 
@@ -73,7 +74,7 @@ set(gca,'FontSize',24);
 % 
 
 
-%% Lax-Friedrichs and Lax-Wendroff comparison
+%% Lax-Friedrichs, Lax-Wendroff, Upwind (Godunov), and BTCS comparison
 figure(3);
 
 flax=zeros(lx,lt);
@@ -81,23 +82,19 @@ flax(:,1)=finitial;
 
 flw=zeros(lx,lt);
 flw(:,1)=finitial;
+
+fgod=zeros(lx,lt);
+fgod(:,1)=finitial;
 for n=1:lt-1
     flax(:,n+1)=LaxFried(dt,dx,v,flax(:,n));
     flw(:,n+1)=LaxWen(dt,dx,v,flw(:,n));
+    fgod(:,n+1)=Godunov(dt,dx,v,fgod(:,n));
     
-    plot(x,flax(:,n+1),x,flw(:,n+1));
-    legend('Lax-F','Law-W')
+    plot(x,flax(:,n+1),x,flw(:,n+1),x,fgod(:,n+1));
+    legend('Lax-F','Law-W','Upwind')
     xlabel('x');
     ylabel('f(x,t)');
     title(sprintf('Solver comparison, t=%5.3f',t(n)));
     set(gca,'FontSize',24);
     pause(0.1);
 end %for
-
-
-%% Upwinding and Godunov's method
-
-
-
-%% Problems with implicit approaches to waves
-
