@@ -16,8 +16,8 @@ lt=numel(t);
 %% Initial conditions for our test problem
 x0=1/2*(a+b);
 sigx=1/15*(b-a);
-finitial=exp(-(x-x0).^2/2/sigx^2);
-%finitial=exp(-(x-x0).^20/2/sigx^20);
+%finitial=exp(-(x-x0).^2/2/sigx^2);
+finitial=exp(-(x-x0).^20/2/sigx^20);
 
 
 %% Analytical solution
