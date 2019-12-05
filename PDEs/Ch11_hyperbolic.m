@@ -17,6 +17,8 @@ lt=numel(t);
 x0=1/2*(a+b);
 sigx=1/15*(b-a);
 finitial=exp(-(x-x0).^2/2/sigx^2);
+%finitial=exp(-(x-x0).^20/2/sigx^20);
+
 
 figure(1);
 plot(x,finitial);
@@ -85,13 +87,17 @@ flw(:,1)=finitial;
 
 fgod=zeros(lx,lt);
 fgod(:,1)=finitial;
+
+fBTCS=zeros(lx,lt);
+fBTCS(:,1)=finitial;
 for n=1:lt-1
     flax(:,n+1)=LaxFried(dt,dx,v,flax(:,n));
     flw(:,n+1)=LaxWen(dt,dx,v,flw(:,n));
     fgod(:,n+1)=Godunov(dt,dx,v,fgod(:,n));
-    
-    plot(x,flax(:,n+1),x,flw(:,n+1),x,fgod(:,n+1));
-    legend('Lax-F','Law-W','Upwind')
+    fBTCS(:,n+1)=BTCS_hyp(dt,dx,v,fBTCS(:,n));
+        
+    plot(x,flax(:,n+1),x,flw(:,n+1),x,fgod(:,n+1),x,fBTCS(:,n+1));
+    legend('Lax-F','Law-W','Upwind','BTCS');
     xlabel('x');
     ylabel('f(x,t)');
     title(sprintf('Solver comparison, t=%5.3f',t(n)));
